@@ -9,18 +9,14 @@ exports.signup = async (req, res, next) => {
     if (!errors.isEmpty()) return
 
     const name = req.body.name;
-    const surname = req.body.surname;
     const email = req.body.email;
     const password = req.body.password;
-    const CF = req.body.CF;
 
     try {
         const hashedPassword = await bcrypt.hash(password, 12);
 
         const userDetails = {
-            CF: CF,
             name: name,
-            surname: surname,
             email: email,
             password: hashedPassword
         }

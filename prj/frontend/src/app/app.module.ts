@@ -15,6 +15,7 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 
@@ -24,6 +25,7 @@ import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
   declarations: [
     AppComponent,
     HomeComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

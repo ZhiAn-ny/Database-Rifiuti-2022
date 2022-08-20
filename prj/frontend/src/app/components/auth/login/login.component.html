@@ -1,0 +1,38 @@
+<kendo-card width="60%">
+    <!-- <kendo-card-header class="k-hstack">
+        <h5 kendoCardTitle>Accedi</h5>
+    </kendo-card-header> -->
+
+    <kendo-card-body>
+        <form [formGroup]="form">
+
+            <kendo-formfield>
+                <kendo-label [for]="email" text="Email"></kendo-label>
+                <kendo-textbox #email
+                  formControlName="email"
+                  required email
+                ></kendo-textbox>
+                <kendo-formerror>Necessario inserire una email.</kendo-formerror>
+            </kendo-formfield>
+
+            <kendo-formfield class="k-formfield">
+                <kendo-label [for]="password" text="Password"></kendo-label>
+                <kendo-textbox #password
+                  formControlName="pwd"
+                  required
+                ></kendo-textbox>
+                <kendo-formerror>Necessario inserire una password.</kendo-formerror>
+            </kendo-formfield>
+
+        </form>
+
+        <div class="row-5">
+            <button kendoButton
+            (click)="login()"
+            >Accedi</button>
+        </div>
+    </kendo-card-body>
+
+
+</kendo-card>
+

@@ -11,3 +11,7 @@
 .row-5 {
     margin-top: 5%;
 }
+.error {
+    color: red;
+    font-style: italic;
+}

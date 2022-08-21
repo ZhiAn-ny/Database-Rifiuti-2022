@@ -14,7 +14,7 @@ module.exports = class User {
         return db.execute(
             'SELECT * FROM users WHERE email = ?', [email]
         ).then(res => {
-            console.log(`search result: ${res}`)
+            // console.log(`search result: ${res[0][0]}`)
             return res
         });
     }

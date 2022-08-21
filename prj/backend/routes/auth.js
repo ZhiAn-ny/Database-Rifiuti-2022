@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.post(
     '/signup', 
-    [
+    [ // Di seguito sono riportati i validators
         body('name').trim().not().isEmpty(),
         body('email').isEmail()
                 .withMessage('Please enter a valid email.')
@@ -27,5 +27,8 @@ router.post(
         body('password').trim().isLength({ min: 7 })
     ], authController.signup
 );
+
+router.post( '/login', authController.login );
+
 
 module.exports = router;

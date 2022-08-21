@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
-import { DatabaseService } from 'src/app/services/database.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +10,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private DBService: DatabaseService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
 
     console.log(user)
 
-    this.DBService.signup(user).subscribe( msg => {
+    this.authService.signup(user).subscribe( msg => {
       console.log(msg)
     });
   }

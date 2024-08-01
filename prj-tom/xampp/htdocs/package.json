@@ -1,0 +1,16 @@
+{
+  "name": "rifiuti-2022",
+  "version": "1.0.0",
+  "main": "index.php",
+  "scripts": {
+    "start": "node index.php"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "supabase": "^1.187.3"
+  },
+  "keywords": [],
+  "description": ""
+}

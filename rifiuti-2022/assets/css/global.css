@@ -67,3 +67,10 @@ td {
     font-weight: bold;
 }
 
+select {
+    background-color: #F2F5E6;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    color: #124B30;
+}

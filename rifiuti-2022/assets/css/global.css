@@ -1,48 +1,65 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oxygen:wght@300;400;700&display=swap');
 
+:root {
+    /* --primary-color: #124B30; */
+    --primary-color: #0E3D27;
+    --primary-color-m: #0E3D27AB;
+    --primary-color-l: #0E3D271E;
+    --secondary-color: #F2F5E6;
+    --secondary-color-m: #F2F5E6AB;
+}
+
 body {
-    color: #124B30;
+    color: var(--primary-color);
     font-family: 'Noto Sans';
-    background-color: #F2F5E6;
+    background-color: var(--secondary-color);
     margin: 3% 5%;
 }
 
 button {
-    background-color: #124B30;
-    color: #F2F5E6;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
     border: none;
     padding: 10px 15px;
     text-align: center;
     cursor: pointer;
     border-radius: 10px;
 }
-
 button:disabled {
-    background-color: #124b30ab;
-    color: #F2F5E6ab;
-    border: none;
-    padding: 10px 15px;
-    text-align: center;
+    background-color: var(--primary-color-m);
+    color: var(--secondary-color-m);
     cursor:unset;
-    border-radius: 10px;
 }
 
 input {
-    background-color: #124b301e;
-    color: #124B30;
+    background-color: var(--primary-color-l);
+    color: var(--primary-color);
     border: none;
     padding-top: 5px;
-    border-bottom: #124B30 solid 2px;
+    border-bottom: var(--primary-color) solid 2px;
     border-radius: 3px;
+}
+
+select {
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    color: var(--primary-color);
+    
+}
+
+select:disabled {
+    background-color: var(--secondary-color-m);
+    color: var(--primary-color-m);
 }
 
 table, tbody, tr, td {
     border: none !important;
     width: 100%;
 }
-
 thead {
-    background-color: #124B30 !important;
+    background-color: var(--primary-color) !important;
     color: white !important;
     font-weight: bold;
     border: none;
@@ -58,19 +75,10 @@ th, td {
     border: none !important;
     border-radius: 5px !important;
 }
-
 td {
-    background-color: #124b301e;
+    background-color: var(--primary-color-l);
 }
 
 .titleRow {
     font-weight: bold;
-}
-
-select {
-    background-color: #F2F5E6;
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
-    color: #124B30;
 }

@@ -64,6 +64,7 @@ async function fetchTurni() {
 
             if (previous !== item.stabilimento) {
                 const titleRow = document.createElement('tr');
+                titleRow.classList.add('titleRow');
                 addCell(
                     titleRow,
                     stabilimento.stabilimento + " - " + stabilimento.zona + ", " + stabilimento.comune
@@ -256,6 +257,9 @@ function getExtraData() {
 
 function addCell(row, item) {
     const cell = document.createElement('td');
+    if (row.classList.length > 0) {
+        row.classList.forEach(c => cell.classList.add(c));
+    }
     cell.textContent = item;
     row.appendChild(cell);
 }

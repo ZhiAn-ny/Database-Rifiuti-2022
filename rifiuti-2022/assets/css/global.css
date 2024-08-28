@@ -65,13 +65,8 @@ thead {
     border: none;
     border-radius: 5px;
 }
-
-/* thead, tr {
-    display: flex;
-    margin: 5px 0px;
-} */
-
 th, td {
+    width: 14% !important;
     border: none !important;
     border-radius: 5px !important;
 }

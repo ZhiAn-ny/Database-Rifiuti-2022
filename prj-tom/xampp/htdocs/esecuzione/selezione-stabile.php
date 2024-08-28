@@ -36,5 +36,6 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
             </tr>
         </table>
         <select id="stabilimentiSelect"></select>
+        <button id="consegnaRifiuti" onclick="btnConsegnaLotto()">Consegna rifiuti</button>
     </body>
 </html>

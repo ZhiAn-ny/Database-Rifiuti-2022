@@ -11,6 +11,7 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <script src="jquery.js"></script>
         <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
         <script src="queries.js"></script>
+        <link href="assets/css/global.css" rel="stylesheet" type="text/css"/>
         <title>Turni lavorativi</title>
         <style>
             table, th, td {

@@ -31,9 +31,26 @@ table, tbody, tr, td {
     width: 100%;
 }
 
+thead {
+    background-color: #124B30 !important;
+    color: white !important;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+}
+
+/* thead, tr {
+    display: flex;
+    margin: 5px 0px;
+} */
+
+th, td {
+    border: none !important;
+    border-radius: 5px !important;
+}
+
 td {
     background-color: #124b301e;
-    border-radius: 5px;
 }
 
 .titleRow {

@@ -13,15 +13,6 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <script src="queries.js"></script>
         <link href="assets/css/global.css" rel="stylesheet" type="text/css"/>
         <title>Accettazione / Smaltimento Rifiuti</title>
-        <style>
-            table, th, td {
-                border: 1px solid black;
-            }
-            th, td {
-                padding: 10px;
-                text-align: left;
-            }
-        </style>
     </head>
     <body>
         <script>

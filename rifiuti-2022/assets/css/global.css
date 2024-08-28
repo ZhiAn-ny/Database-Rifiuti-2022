@@ -17,6 +17,16 @@ button {
     border-radius: 10px;
 }
 
+button:disabled {
+    background-color: #124b30ab;
+    color: #F2F5E6ab;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    cursor:unset;
+    border-radius: 10px;
+}
+
 input {
     background-color: #124b301e;
     color: #124B30;

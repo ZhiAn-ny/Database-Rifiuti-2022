@@ -1,7 +1,6 @@
 <?php
 $apiUrl = 'https://xweymuycrivnwklxqhwq.supabase.co/rest/v1';
 $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3ZXltdXljcml2bndrbHhxaHdxIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxOTc2NDM4MSwiZXhwIjoyMDM1MzQwMzgxfQ.jG4noxmSFQgQPBZ4G6b6AWtzcu5SxwBTVnR5L9gGJq0';
-$tableName = 'Stabilimenti';
 ?>
 
 <!DOCTYPE html>
@@ -14,10 +13,6 @@ $tableName = 'Stabilimenti';
         <script src="queries.js"></script>
         <title>Supabase</title>
     <style>
-        /* table {
-            width: 100%;
-            border-collapse: collapse;
-        } */
         table, th, td {
             border: 1px solid black;
         }
@@ -26,10 +21,11 @@ $tableName = 'Stabilimenti';
             text-align: left;
         }
     </style>
+    <meta http-equiv="refresh" content="0; url=login.php" />
 </head>
 <body>
     <h2>RPC Call</h2>
-    <button onclick="callRpcFunction()">Call RPC Function</button>
+    <button onclick="fetchStabilimenti()">Call RPC Function</button>
     <table>
         <tr>
             <td id ="resultsTable"></td>

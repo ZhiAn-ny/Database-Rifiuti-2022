@@ -39,9 +39,9 @@ async function fetchStabilimenti(tipologie = []) {
     else return data
 }
 
-async function fetchStabilimentoByID(codiceinput) {
+async function fetchStabilimentoByID_Zona_Comune(codiceinput, zona, comune) {
     const { data, error } = await _supabase
-        .rpc('get_stabilimento_info', { stabilimento_code: codiceinput })
+        .rpc('get_stabilimento_info', { stabilimento_code: codiceinput, zona_input: zona, comune_input: comune })
         .single();
     if (error) console.error(error)
     else return data
@@ -59,12 +59,11 @@ async function fetchTurni() {
         let previous = "";
 
         for (const item of data) {
-            const stabilimento = await fetchStabilimentoByID(item.stabilimento);
+            const stabilimento = await fetchStabilimentoByID_Zona_Comune(item.stabilimento, item.zona, item.comune);
             const newRow = document.createElement('tr');
 
             if (previous !== item.stabilimento) {
                 const titleRow = document.createElement('tr');
-                titleRow.classList.add('titleRow');
                 addCell(
                     titleRow,
                     stabilimento.stabilimento + " - " + stabilimento.zona + ", " + stabilimento.comune
@@ -128,7 +127,7 @@ async function fetchEsecuzione_Proprie() {
     const { data, error } = await _supabase
         .rpc('get_esecuzione_info', { utente_id: loginInfo.cf });
     if (error) console.error(error)
-
+    console.log(data)
     if (data) {
         let resultsTable = document.getElementById('esecuzione_proprieTable');
         createTableHeader(resultsTable, ["Inizio", "Rotta", "Targa camion", "Ruolo", "Stato carico", "Peso carico"])
@@ -165,7 +164,7 @@ async function fetchEsecuzione_Proprie() {
                     addCell(newRow, item.peso.toFixed(2) + ' Kg');
                     let btn = document.createElement("button");
                     let loginData = getLoginInfo();
-                    addButtonCell(newRow, "Gestisci carico", () => redirectToPage("esecuzione/aggiunta-rifiuti.php", loginData, { lotto: item.carico_id }), btn);
+                    addButtonCell(newRow, "Gestisci corsa", () => redirectToPage("esecuzione/aggiunta-rifiuti.php", loginData, { lotto: item.carico_id }), btn);
                     if (item.stato === StatiCarico.CONSEGNATO) {
                         dropdownSelect.disabled = true;
                         btn.disabled = true;
@@ -202,7 +201,7 @@ async function fetchRifiutiLotto(include_removeBtn) {
 
 async function fetchRifiutiByStabilimento(stabilimento_id, zona_id, codice_id) {
     const { data, error } = await _supabase
-        .rpc('get_accetazione_rifiuti', { stabilimento_id: stabilimento_id, zona_id: zona_id, codice_id: codice_id })
+        .rpc('get_accettazione_rifiuti', { stabilimento_id: stabilimento_id, zona_id: zona_id, codice_id: codice_id })
     if (error) console.error(error)
     else return data
 }
@@ -257,9 +256,6 @@ function getExtraData() {
 
 function addCell(row, item) {
     const cell = document.createElement('td');
-    if (row.classList.length > 0) {
-        row.classList.forEach(c => cell.classList.add(c));
-    }
     cell.textContent = item;
     row.appendChild(cell);
 }
@@ -437,9 +433,9 @@ async function rimuoviRifiutoLotto(rifiuto, lotto) {
     ]);
 }
 
-async function consegnaLotto(lotto, stabilimento) {
+async function consegnaLotto(lotto, stabilimento, zona, comune) {
     const { data, error } = await _supabase
-        .rpc('consegna_lotto', { rifiuto_input: rifiuto, lotto_input: lotto })
+        .rpc('consegna_lotto', { lotto_input: lotto, stabilimento_input: stabilimento, zona_input: zona, comune_input: comune })
     if (error) console.error(error);
     else return true;
 }
@@ -476,7 +472,7 @@ async function handleStabilimentiDropdown() {
     const stabilimentiDisponibili = await fetchStabilimenti([5, 3]);
     stabilimentiDisponibili.forEach(stabilimento => {
         const option = document.createElement('option');
-        option.value = stabilimento.codice;
+        option.value = stabilimento.codice + "," + stabilimento.zona + "," + stabilimento.comune;
         option.text = stabilimento.descrizione;
         select.appendChild(option);
     });
@@ -495,12 +491,13 @@ async function btnAggiungiRifiuto() {
 }
 
 async function btnConsegnaLotto() {
-    const stabilimento = document.getElementById('stabilimentiSelect').value;
+    const stabilimentoSelezionato = document.getElementById('stabilimentiSelect').value;
     const lotto = getExtraData().lotto;
-
+    const stabilimento = stabilimentoSelezionato.split(",");
     if (stabilimento != "") {
-        result = await consegnaLotto(lotto, stabilimento);
+        result = await consegnaLotto(lotto, stabilimento[0], stabilimento[1], stabilimento[2]);
         if (result) {
+            const loginData = getLoginInfo();
             redirectToPage("esecuzione.php", loginData)
         }
     }

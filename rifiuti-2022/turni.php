@@ -14,15 +14,6 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <link href="assets/css/global.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/turni.css" rel="stylesheet" type="text/css"/>
         <title>Turni lavorativi</title>
-        <style>
-            table, th, td {
-                border: 1px solid black;
-            }
-            th, td {
-                padding: 10px;
-                text-align: left;
-            }
-        </style>
     </head>
     <body>
         <script>

@@ -12,6 +12,7 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
         <script src="queries.js"></script>
         <link href="assets/css/global.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/accettazione-smaltimento.css" rel="stylesheet" type="text/css"/>
         <title>Accettazione / Smaltimento Rifiuti</title>
     </head>
     <body>

@@ -1,0 +1,7 @@
+th,td {
+    width: 12% !important;
+}
+th:nth-of-type(2),
+th:nth-of-type(3) {
+    width: 30% !important;
+}

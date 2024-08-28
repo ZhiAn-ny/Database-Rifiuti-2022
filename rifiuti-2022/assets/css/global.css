@@ -66,9 +66,10 @@ thead {
     border-radius: 5px;
 }
 th, td {
-    width: 14% !important;
     border: none !important;
     border-radius: 5px !important;
+    padding: 10px;
+    text-align: left;
 }
 td {
     background-color: var(--primary-color-l);
@@ -76,4 +77,8 @@ td {
 
 .titleRow {
     font-weight: bold;
+}
+
+hr {
+    border: 2px solid;
 }

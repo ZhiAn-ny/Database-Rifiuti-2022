@@ -1,10 +1,9 @@
 let extra = getExtraData()
-document.getElementById("pageTitle").innerText = "Contenuto del carico con lotto " + extra.lotto;
+document.getElementById("pageTitle").innerText = "Contenuto del carico con lotto " + extra.lotto.carico_id;
 
 async function btnAggiungiRifiuto() {
     const rifiuto = document.getElementById('rifiutiSelect').value;
-    const lotto = getExtraData().lotto;
-    console.log(rifiuto)
+    const lotto = getExtraData().lotto.carico_id;
     if (rifiuto != "") {
         await aggiungiRifiutoLotto(rifiuto, lotto)
         refreshTables([

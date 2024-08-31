@@ -29,6 +29,7 @@ $nome = ''
         <section>
             <button onclick="redirectToPage('turni.php', getLoginInfo())">Il mio calendario lavorativo</button>
             <button onclick="redirectToPage('accettazione-smaltimento.php', getLoginInfo())">Accettazione / smaltimento rifiuti</button>
+            <button onclick="redirectToPage('esecuzione', getLoginInfo())">Esecuzione corse</button>
         </section>
     </body>
 </html>

@@ -83,10 +83,9 @@ function addCorsaToList(corsa, cList) {
 
     const btn = document.createElement("button");
     btn.innerText = "Assegna utenti";
-    btn.onclick = () => {
-        // TODO: apri pagina per assegnare utenti
-    }
+    btn.onclick = () => redirectToPage("assegnazione-utenti.php", getLoginInfo());
     cDiv.appendChild(btn);
 
     cList.appendChild(cDiv);
 }
+

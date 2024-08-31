@@ -4,3 +4,10 @@ th,td {
 th:nth-of-type(2) {
     width: 30% !important;
 }
+
+section {
+    margin-bottom: 5%;
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+}

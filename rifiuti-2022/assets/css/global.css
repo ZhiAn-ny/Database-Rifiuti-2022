@@ -43,15 +43,19 @@ input {
 select {
     background-color: var(--secondary-color);
     border: none;
+    border-bottom: var(--primary-color) 2px solid;
+    color: var(--primary-color);
     border-radius: 5px;
     padding: 5px;
     color: var(--primary-color);
     
 }
-
 select:disabled {
     background-color: var(--secondary-color-m);
     color: var(--primary-color-m);
+}
+td select {
+    border: none;
 }
 
 table, tbody, tr, td {

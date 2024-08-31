@@ -489,7 +489,7 @@ async function btnAggiungiRifiuto() {
     if (rifiuto != "") {
         await aggiungiRifiutoLotto(rifiuto, lotto)
         refreshTables([
-            { table: document.getElementById('rifiutiLottoTable'), function: fetchRifiutiLotto() },
+            { table: document.getElementById('rifiutiLottoTable'), function: fetchRifiutiLotto(true) },
         ]);
     }
 }

@@ -1,6 +1,6 @@
 async function fetchTurniTable() {
     const user = getLoginInfo();
-    const stabilimenti = getStabilimentiPerUtente(user);
+    const stabilimenti = await getStabilimentiPerUtente(user);
 
     if (stabilimenti) {
         let resultsTable = document.getElementById('turniTable');

@@ -1,7 +1,7 @@
 async function fetchMagazzinoRifiuti() {
     try {
         const user = getLoginInfo();
-        const stabilimenti = getStabilimentiPerUtente(user);
+        const stabilimenti = await getStabilimentiPerUtente(user);
 
         for (const stabilimento of stabilimenti) {
             const rifiuti = await fetchRifiutiByMagazzino(stabilimento.stabilimento, stabilimento.zona, stabilimento.comune);

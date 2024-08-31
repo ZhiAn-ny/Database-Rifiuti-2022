@@ -35,6 +35,7 @@ $nome = ''
                     <span>Camion</span>
                     <span>Lotto</span>
                     <span>Rotta</span>
+                    <span></span>
                 </div>
                 <div id="corse-list"></div>
             </div>

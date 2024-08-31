@@ -55,13 +55,38 @@ function addCorsaToList(corsa, cList) {
     camion.innerText = corsa.camion
     cDiv.appendChild(camion);
 
-    const lot = document.createElement("span");
-    lot.innerText = corsa.carico
-    cDiv.appendChild(lot);
+    if (corsa.carico) {
+        const lot = document.createElement("span");
+        lot.innerText = corsa.carico
+        cDiv.appendChild(lot);
+    } else {
+        const btn = document.createElement("button");
+        btn.innerText = "Assegna carico";
+        btn.onclick = () => {
+            // TODO: apri pagina per assegnare carico
+        }
+        cDiv.appendChild(btn);
+    }
 
-    const rotta = document.createElement("span");
-    rotta.innerText = corsa.rotta
-    cDiv.appendChild(rotta);
+    if (corsa.rotta) {
+        const rotta = document.createElement("span");
+        rotta.innerText = corsa.rotta
+        cDiv.appendChild(rotta);
+    } else {
+        const btn = document.createElement("button");
+        btn.innerText = "Assegna rotta";
+        btn.onclick = () => {
+            // TODO: apri pagina per assegnare rotta
+        }
+        cDiv.appendChild(btn);
+    }
+
+    const btn = document.createElement("button");
+    btn.innerText = "Assegna utenti";
+    btn.onclick = () => {
+        // TODO: apri pagina per assegnare utenti
+    }
+    cDiv.appendChild(btn);
 
     cList.appendChild(cDiv);
 }

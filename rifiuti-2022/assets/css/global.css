@@ -30,6 +30,9 @@ button:disabled {
     color: var(--secondary-color-m);
     cursor:unset;
 }
+button:hover {
+    background-color: var(--primary-color-m);
+}
 
 input {
     background-color: var(--primary-color-l);

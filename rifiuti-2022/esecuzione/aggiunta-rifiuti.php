@@ -10,6 +10,7 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="../jquery.js"></script>
         <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+        <script src="aggiunta-rifiuti.js" defer></script>
         <script src="../queries.js"></script>
         <link href="../assets/css/global.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/css/esecuzione.css" rel="stylesheet" type="text/css"/>
@@ -33,14 +34,13 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
             });
         </script>
 
-        <section class="bottom-5">
+        <h1 id="pageTitle"></h1>
+        <section>
             <table>
-                <tr>
-                    <td id ="rifiutiLottoTable"></td>
-                </tr>
+                <td id ="rifiutiLottoTable"></td>
             </table>
         </section>
-        <section class="bottom-5">
+        <section class="flex-row">
             <button id="aggiungiRifiuto" onclick="btnAggiungiRifiuto()">Aggiungi rifiuto</button>
             <select id="rifiutiSelect"></select>
         </section>

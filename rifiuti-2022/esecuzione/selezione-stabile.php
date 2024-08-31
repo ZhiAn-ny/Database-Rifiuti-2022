@@ -32,14 +32,13 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
                 handleStabilimentiDropdown();
             });
         </script>
+        <h1>Consegna carico</h1>
         <section>
             <table>
-                <tr>
-                    <td id ="rifiutiLottoTable"></td>
-                </tr>
+                <td id ="rifiutiLottoTable"></td>
             </table>
         </section>
-        <section>
+        <section class="flex-row">
             <select id="stabilimentiSelect"></select>
             <button id="consegnaRifiuti" onclick="btnConsegnaLotto()">Consegna rifiuti</button>
         </section>

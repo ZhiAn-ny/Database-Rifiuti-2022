@@ -1,17 +1,12 @@
+async function fetchTurniTable() {
+    const user = getLoginInfo();
+    const stabilimenti = getStabilimentiPerUtente(user);
 
-
-async function fetchTurni() {
-    let loginInfo = getLoginInfo();
-    const { data, error } = await getSupabase()
-        .from('Turni')
-        .select()
-        .eq('utente', loginInfo.cf);
-
-    if (data) {
+    if (stabilimenti) {
         let resultsTable = document.getElementById('turniTable');
         let previous = "";
 
-        for (const item of data) {
+        for (const item of stabilimenti) {
             const stabilimento = await fetchStabilimentoByID_Zona_Comune(item.stabilimento, item.zona, item.comune);
             const newRow = document.createElement('tr');
 
@@ -30,4 +25,18 @@ async function fetchTurni() {
             resultsTable.appendChild(newRow);
         }
     }
+}
+
+async function getStabilimentiPerUtente(user) {
+    const { data, error } = await getSupabase()
+        .from('Turni')
+        .select()
+        .eq('utente', user.cf);
+    if (error) console.error(error);
+
+    return data.filter((value, index, self) =>
+        index === self.findIndex((t) => (
+            t.stabilimento === value.stabilimento && t.zona === value.zona && t.comune === value.comune
+        ))
+    );
 }

@@ -13,21 +13,19 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <script src="assets/javascript/common.js"></script>
         <script src="assets/javascript/utils.js"></script>
         <script src="assets/javascript/auth.js"></script>
-        <script src="assets/javascript/turniUtenti.js"></script>
-        <script src="assets/javascript/stabilimenti.js"></script>
+        <script src="assets/javascript/magazzino.js"></script>
         <link href="assets/css/global.css" rel="stylesheet" type="text/css"/>
-        <link href="assets/css/turni.css" rel="stylesheet" type="text/css"/>
-        <title>Turni lavorativi</title>
+        <link href="assets/css/accettazione-smaltimento.css" rel="stylesheet" type="text/css"/>
+        <title>Accettazione / Smaltimento Rifiuti</title>
     </head>
     <body>
         <script>
             fetchLoginData();
-            fetchTurniTable();
+            fetchMagazzinoRifiuti();
         </script>
-        <h1>I miei turni</h1>
         <table>
             <tr>
-                <td id ="turniTable"></td>
+                <td id ="magazzinoTable"></td>
             </tr>
         </table>
     </body>

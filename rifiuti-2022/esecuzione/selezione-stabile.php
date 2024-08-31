@@ -11,6 +11,8 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <script src="../jquery.js"></script>
         <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
         <script src="../queries.js"></script>
+        <link href="../assets/css/global.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/css/esecuzione.css" rel="stylesheet" type="text/css"/>
         <title>Aggiungi rifiuti al tuo carico</title>
         <style>
             table, th, td {
@@ -30,12 +32,16 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
                 handleStabilimentiDropdown();
             });
         </script>
-        <table>
-            <tr>
-                <td id ="rifiutiLottoTable"></td>
-            </tr>
-        </table>
-        <select id="stabilimentiSelect"></select>
-        <button id="consegnaRifiuti" onclick="btnConsegnaLotto()">Consegna rifiuti</button>
+        <section>
+            <table>
+                <tr>
+                    <td id ="rifiutiLottoTable"></td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <select id="stabilimentiSelect"></select>
+            <button id="consegnaRifiuti" onclick="btnConsegnaLotto()">Consegna rifiuti</button>
+        </section>
     </body>
 </html>

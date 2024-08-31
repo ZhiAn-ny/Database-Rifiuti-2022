@@ -33,10 +33,12 @@ async function getStabilimentiPerUtente(user) {
         .select()
         .eq('utente', user.cf);
     if (error) console.error(error);
-
-    return data.filter((value, index, self) =>
+    
+    const filteredData = data.filter((value, index, self) =>
         index === self.findIndex((t) => (
             t.stabilimento === value.stabilimento && t.zona === value.zona && t.comune === value.comune
         ))
     );
+
+    return filteredData;
 }

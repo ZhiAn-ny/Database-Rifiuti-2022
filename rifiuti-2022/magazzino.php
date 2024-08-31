@@ -14,9 +14,10 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <script src="assets/javascript/utils.js"></script>
         <script src="assets/javascript/auth.js"></script>
         <script src="assets/javascript/magazzino.js"></script>
+        <script src="assets/javascript/turniUtenti.js"></script>
         <link href="assets/css/global.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/accettazione-smaltimento.css" rel="stylesheet" type="text/css"/>
-        <title>Accettazione / Smaltimento Rifiuti</title>
+        <title>Magazzino</title>
     </head>
     <body>
         <script>

@@ -11,7 +11,8 @@ $nome = ''
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="jquery.js"></script>
         <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-        <script src="queries.js"></script>
+        <script src="assets/javascript/common.js"></script>
+        <script src="assets/javascript/auth.js"></script>
         <script src="dashboard.js" defer></script>
         <link href="assets/css/global.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/dashboard.css" rel="stylesheet" type="text/css"/>

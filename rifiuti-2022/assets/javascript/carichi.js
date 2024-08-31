@@ -38,7 +38,7 @@ async function setStatoCarico(stato, inizio_input, targa_input) {
  */
 async function fetchRifiutiLotto(include_removeBtn) {
     try {
-        const lotto = getExtraData().lotto;
+        const lotto = getExtraData().lotto.carico_id;
         let resultsTable = document.getElementById('rifiutiLottoTable');
         const rifiuti = await fetchRifiutiByLotto(lotto);
         createTableHeader(resultsTable, ["Descrizione rifiuto", "Quantità"]);
@@ -50,7 +50,7 @@ async function fetchRifiutiLotto(include_removeBtn) {
             addCell(newRow, rifiuto.qta);
             if(include_removeBtn) {
                 let btn = document.createElement("button");
-                let lotto = getExtraData().lotto;
+                let lotto = getExtraData().lotto.carico_id;
                 addButtonCell(newRow, booleanToTicks(false), () => rimuoviRifiutoLotto(rifiuto.rifiuto_id, lotto), btn);
             }
 
@@ -74,20 +74,22 @@ async function rimuoviRifiutoLotto(rifiuto, lotto) {
     ]);
 }
 
-async function consegnaLotto(lotto, stabilimento, zona, comune) {
+async function consegnaLotto(lotto, stabilimento, zona, comune, data_carico = new Date().toISOString()) {
     const { data, error } = await getSupabase()
-        .rpc('consegna_lotto', { lotto_input: lotto, stabilimento_input: stabilimento, zona_input: zona, comune_input: comune })
+        .rpc('consegna_lotto', { comune_input: comune, data_carico_input: data_carico, lotto_input: lotto, stabilimento_input: stabilimento, zona_input: zona })
     if (error) console.error(error);
     else return true;
 }
 
 async function btnConsegnaLotto() {
     const stabilimentoSelezionato = document.getElementById('stabilimentiSelect').value;
-    const lotto = getExtraData().lotto;
+    const extra = getExtraData();
     const stabilimento = stabilimentoSelezionato.split(",");
     if (stabilimento != "") {
-        result = await consegnaLotto(lotto, stabilimento[0], stabilimento[1], stabilimento[2]);
+        result = await consegnaLotto(extra.lotto.carico_id, stabilimento[0], stabilimento[1], stabilimento[2]);
+        console.log(result);
         if (result) {
+            //setStatoCarico(StatiCarico.CONSEGNATO, )
             const loginData = getLoginInfo();
             redirectPreviousPage(loginData)
         }

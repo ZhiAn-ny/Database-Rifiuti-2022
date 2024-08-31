@@ -10,7 +10,6 @@ async function fetchRifiuti() {
 async function fetchRifiutiGenerici() {
     const { data, error } = await _supabase
         .rpc('get_rifiuti_generici', '')
-        console.log(data)
     if (error) console.error(error);
     else return data;
 }

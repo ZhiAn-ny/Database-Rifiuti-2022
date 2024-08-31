@@ -26,7 +26,7 @@ function getLoginInfo() {
 function fetchLoginData() {
     const data = getLoginInfo();
     if (!data) {
-        redirectToPage('/login.php');
+        redirectToPageGlobal('login.php');
     }
 }
 

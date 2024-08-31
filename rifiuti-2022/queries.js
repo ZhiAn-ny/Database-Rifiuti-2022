@@ -155,7 +155,7 @@ async function fetchEsecuzione_Proprie() {
                             ]);
                             if(stato == StatiCarico.CONSEGNATO) {
                                 let loginData = getLoginInfo();
-                                redirectToPage('esecuzione/selezione-stabile.php', loginData, { lotto: item.carico_id })
+                                redirectToPage('selezione-stabile.php', loginData, { lotto: item.carico_id })
                             }
                         } else {
                             event.target.value = item.stato;
@@ -165,7 +165,7 @@ async function fetchEsecuzione_Proprie() {
                     addCell(newRow, item.peso.toFixed(2) + ' Kg');
                     let btn = document.createElement("button");
                     let loginData = getLoginInfo();
-                    addButtonCell(newRow, "Gestisci corsa", () => redirectToPage("esecuzione/aggiunta-rifiuti.php", loginData, { lotto: item.carico_id }), btn);
+                    addButtonCell(newRow, "Gestisci corsa", () => redirectToPage("aggiunta-rifiuti.php", loginData, { lotto: item.carico_id }), btn);
                     if (item.stato === StatiCarico.CONSEGNATO) {
                         dropdownSelect.disabled = true;
                         btn.disabled = true;

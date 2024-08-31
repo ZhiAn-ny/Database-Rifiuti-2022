@@ -23,13 +23,4 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
     </style>
     <meta http-equiv="refresh" content="0; url=login.php" />
 </head>
-<body>
-    <h2>RPC Call</h2>
-    <button onclick="fetchStabilimenti()">Call RPC Function</button>
-    <table>
-        <tr>
-            <td id ="resultsTable"></td>
-        </tr>
-    </table>
-</body>
 </html>

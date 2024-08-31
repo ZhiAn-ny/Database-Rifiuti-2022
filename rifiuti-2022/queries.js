@@ -32,9 +32,9 @@ async function loginSito() {
 }
 async function fetchStabilimenti(tipologie = []) {
     const { data, error } = await _supabase
-    .from('Stabilimenti')
-    .select()
-    .in('tipo', tipologie);
+        .from('Stabilimenti')
+        .select()
+        .in('tipo', tipologie);
     if (error) console.error(error)
     else return data
 }
@@ -148,12 +148,12 @@ async function fetchEsecuzione_Proprie() {
                     dropdownSelect.addEventListener('change', async function (event) {
                         const stato = event.target.value;
                         const resp = await setStatoCarico(stato, item.inizio, item.targa);
-                        if(resp) {
+                        if (resp) {
                             refreshTables([
                                 { table: document.getElementById('esecuzioneTable'), function: fetchEsecuzione() },
                                 { table: document.getElementById('esecuzione_proprieTable'), function: fetchEsecuzione_Proprie() }
                             ]);
-                            if(stato == StatiCarico.CONSEGNATO) {
+                            if (stato == StatiCarico.CONSEGNATO) {
                                 let loginData = getLoginInfo();
                                 redirectToPage('selezione-stabile.php', loginData, { lotto: item.carico_id })
                             }
@@ -189,7 +189,7 @@ async function fetchRifiutiLotto(include_removeBtn) {
 
             addCell(newRow, rifiuto.rifiuto_des);
             addCell(newRow, rifiuto.qta);
-            if(include_removeBtn) {
+            if (include_removeBtn) {
                 let btn = document.createElement("button");
                 let lotto = getExtraData().lotto;
                 addButtonCell(newRow, booleanToTicks(false), () => rimuoviRifiutoLotto(rifiuto.rifiuto_id, lotto), btn);
@@ -330,15 +330,7 @@ async function setStatoCarico(stato, inizio_input, targa_input) {
             return true;
         case StatiCarico.CONSEGNATO:
             const userResponse = confirm("Vuoi consegnare il carico di questo camion?");
-            if (userResponse) {
-                const { dataConsegnato, errorConsegnato } = await _supabase
-                    .rpc('set_carico_consegnato', { inizio_input: inizio_input, targa_input: targa_input })
-                if (errorConsegnato) console.error(errorConsegnato)
-                return userResponse;
-            }
-            else {
-                return userResponse;
-            }
+            return userResponse;
     }
 }
 
@@ -422,6 +414,14 @@ async function fetchRifiuti() {
     else return data;
 }
 
+async function fetchRifiutiGenerici() {
+    const { data, error } = await _supabase
+        .rpc('get_rifiuti_generici', '')
+        console.log(data)
+    if (error) console.error(error);
+    else return data;
+}
+
 async function aggiungiRifiutoLotto(rifiuto, lotto) {
     const { data, error } = await _supabase
         .rpc('add_rifiuto_lotto', { rifiuto_input: rifiuto, lotto_input: lotto })
@@ -454,11 +454,11 @@ async function handleRifiutiDropdown() {
     defaultOption.selected = true;
     select.appendChild(defaultOption);
 
-    const rifiutiDisponibili = await fetchRifiuti();
+    const rifiutiDisponibili = await fetchRifiutiGenerici();
     rifiutiDisponibili.forEach(rifiuto => {
         const option = document.createElement('option');
-        option.value = rifiuto.codice;
-        option.text = rifiuto.descrizione;
+        option.value = rifiuto.tipologia_id;
+        option.text = rifiuto.tipologia_des;
         select.appendChild(option);
     });
 }
@@ -484,6 +484,7 @@ async function handleStabilimentiDropdown() {
 
 async function btnAggiungiRifiuto() {
     const rifiuto = document.getElementById('rifiutiSelect').value;
+    console.log(rifiuto)
     const lotto = getExtraData().lotto;
 
     if (rifiuto != "") {

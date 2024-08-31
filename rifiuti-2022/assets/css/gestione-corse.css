@@ -1,0 +1,55 @@
+#corse-list-container {
+    background-color: var(--primary-color-l);
+    color: var(--secondary-color);
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.corsa-row, .corse-header {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    background-color: var(--primary-color-l);
+    padding: 0.5rem;
+    border-radius: 0.7rem;
+}
+.corse-header {
+    background-color: var(--primary-color);
+}
+.corsa-row span, .corse-header span {
+    width: 100%;
+    align-content: center;
+    color: var(--primary-color);
+    padding: 5px 15px;
+    border-radius: 0.5rem;
+}
+.corse-header span {
+    color: var(--secondary-color);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+form div {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin-bottom: 2%;
+}
+form div label {
+    min-width: 100px;
+}
+form div input, form div select {
+    width: 100%;
+    padding: 5px;
+}
+
+button {
+    width: 100%;
+}

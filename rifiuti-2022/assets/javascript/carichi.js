@@ -70,7 +70,7 @@ async function rimuoviRifiutoLotto(rifiuto, lotto) {
         .rpc('delete_rifiuto_lotto', { rifiuto_input: rifiuto, lotto_input: lotto })
     if (error) console.error(error);
     refreshTables([
-        { table: document.getElementById('rifiutiLottoTable'), function: fetchRifiutiLotto() },
+        { table: document.getElementById('rifiutiLottoTable'), function: fetchRifiutiLotto(true) },
     ]);
 }
 

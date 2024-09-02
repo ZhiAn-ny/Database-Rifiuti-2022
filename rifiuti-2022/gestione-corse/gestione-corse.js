@@ -61,9 +61,15 @@ function addCorsaToList(corsa, cList) {
     } else {
         const btn = document.createElement("button");
         btn.innerText = "Assegna carico";
-        btn.onclick = () => {
+        btn.onclick = (event) => {
             // TODO: apri pagina per assegnare carico
-            getCarichiSelect()
+            let dateStr = event.target.parentElement.children[0].innerText;
+            let [date, time] = dateStr.split(', ');
+            let [day, month, year] = date.split('/');
+            date = month + "/" + day + "/" + year;
+            const dateTime = new Date(date + "Z" + time + "+2");
+            const tag = event.target.parentElement.children[1].innerText;
+            getCarichiSelect(dateTime, tag)
         }
         cDiv.appendChild(btn);
     }
@@ -89,7 +95,7 @@ function addCorsaToList(corsa, cList) {
     cList.appendChild(cDiv);
 }
 
-function getCarichiSelect() {
+function getCarichiSelect(dateTime, tag) {
     toggleDialog('caricoPopup').then(visible => {
         if (visible) {
             getAllCarichi().then(carichi => {
@@ -108,6 +114,7 @@ function getCarichiSelect() {
                 
                 btn.onclick = () => {
                     console.log('TODO: Assegna carico');
+                    setCaricoCorsa(dateTime, tag, +sel.value)
                 }
                 carichiPopup.appendChild(btn);
 

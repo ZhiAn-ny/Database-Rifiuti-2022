@@ -26,5 +26,19 @@ async function addNewCorsa(dataOraInizio, camion) {
             }
         ])
         .select()
-        
 }
+
+function setCaricoCorsa(dataOraInizio, camion, carico) {
+    console.log('set', dataOraInizio, camion, carico)
+    return getSupabase()
+        .from('Corse')
+        .where('camion', camion)
+        .where('inizio', dataOraInizio)
+        .update({carico: carico})
+        .select()
+    
+}
+
+function setRottaCorsa(dataOraInizio, camion, rotta) {
+}
+

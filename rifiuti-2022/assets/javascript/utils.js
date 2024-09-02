@@ -91,6 +91,22 @@ const options = [
     { value: 'option3', text: 'Option 3' }
 ];
 
+function addDefaultOption(text, ddl) {
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.text = text;
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    ddl.appendChild(defaultOption);
+}
+
+function addOption(value, text, ddl) {
+    const defaultOption = document.createElement('option');
+    defaultOption.value = value;
+    defaultOption.text = text;
+    ddl.appendChild(defaultOption);
+}
+
 // DATA TYPES
 
 function formatDate(data) {
@@ -109,3 +125,39 @@ function booleanToTicks(bool) {
     return bool ? '\u2705' : '\u274C';
 }
 
+// DIALOG
+
+function createDialogFrom(elementId, extraStyle = "") {
+    const container = document.getElementById(elementId);
+    let style = "height: 200px; width: 70%;" 
+        + "background: var(--primary-color-m); position: absolute;"
+        + "top: 40px; left: 15%;"
+        + "border: 1px solid rgba(255, 255, 255, 0.18);"
+        + "border-radius: 10px;"
+        + "backdrop-filter: blur(5px);"
+        + "box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);"
+        + "overflow: auto;"
+        + "flex-direction: column;"
+        + "gap: 2%;"
+        + "padding: 2%;" + extraStyle;
+    container.setAttribute("style", style);
+    container.hidden = true;
+}
+
+/** @returns a promise indicating if the container is visible. */
+function toggleDialog(elementId) {
+    const container = document.getElementById(elementId);
+    container.hidden = !container.hidden;
+    if (!container.hidden) {
+        container.style.display = "flex";
+    } else {
+        container.style.display = "none";
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+    }
+    return new Promise(function(resolve, reject) {
+        resolve(!container.hidden);
+    });
+
+}

@@ -1,4 +1,8 @@
-
+const carichiPopup = document.getElementById('caricoPopup');
+createDialogFrom(
+    'caricoPopup', 
+    'padding: 50px; width: 20%; gap: 30px; left: 35%;'
+);
 
 getAllCorse().then((corse) => {
     const corseList = document.getElementById("corse-list");
@@ -9,12 +13,7 @@ getAllCorse().then((corse) => {
 
 getAllCamion().then((camion) => {
     const select = document.getElementById('camionDdl');
-    const defaultOption = document.createElement('option');
-    defaultOption.value = '';
-    defaultOption.text = 'Scegli camion';
-    defaultOption.disabled = true;
-    defaultOption.selected = true;
-    select.appendChild(defaultOption);
+    addDefaultOption('Scegli camion', select);
     camion.forEach((cam) => {
         const option = document.createElement('option');
         option.value = cam.targa;
@@ -64,6 +63,7 @@ function addCorsaToList(corsa, cList) {
         btn.innerText = "Assegna carico";
         btn.onclick = () => {
             // TODO: apri pagina per assegnare carico
+            getCarichiSelect()
         }
         cDiv.appendChild(btn);
     }
@@ -89,3 +89,38 @@ function addCorsaToList(corsa, cList) {
     cList.appendChild(cDiv);
 }
 
+function getCarichiSelect() {
+    toggleDialog('caricoPopup').then(visible => {
+        if (visible) {
+            getAllCarichi().then(carichi => {
+                const sel = document.createElement('select');
+                sel.name = "carichiDdl";
+                sel.id = "carichiDdl";
+                sel.style.background = "var(--secondary-color)";
+                addDefaultOption("Scegli carico da assegnare", sel);
+                carichi.forEach((carico) => addOption(carico.lotto, carico.lotto, sel));
+                carichiPopup.appendChild(sel);
+                
+                const btn = document.createElement("button");
+                btn.innerText = "Assegna";
+                btn.style.background = "var(--secondary-color)";
+                btn.style.color = "var(--primary-color)";
+                
+                btn.onclick = () => {
+                    console.log('TODO: Assegna carico');
+                }
+                carichiPopup.appendChild(btn);
+
+                // if (carichiPopup.children.length == 0) {
+                //     let p = document.createElement("p");
+                //     p.innerText = "Nessun carico disponibile.";
+                //     p.style.textAlign = "center";
+                //     p.style.color = "var(--secondary-color)";
+                //     p.style.fontWeight = "bold";
+                //     p.style.marginTop = "20%";
+                //     carichiPopup.appendChild(p);
+                // }
+            });
+        }
+    });
+}

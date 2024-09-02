@@ -6,6 +6,14 @@ const StatiCarico = Object.freeze({
     SMALTITO: "Smaltito"
 });
 
+async function getAllCarichi() {
+    const {data, error} = await getSupabase()
+        .from('Carichi')
+        .select();
+    if (error) console.error(error)
+    else return data
+}
+
 async function getStatoCarico(inizio_input, targa_input) {
     const { data, error } = await getSupabase()
         .rpc('get_stato_carico', { inizio_input: inizio_input, targa_input: targa_input })

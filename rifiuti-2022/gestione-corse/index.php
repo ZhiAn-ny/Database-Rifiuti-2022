@@ -13,8 +13,10 @@ $nome = ''
         <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
         <script src="../assets/javascript/common.js"></script>
         <script src="../assets/javascript/auth.js"></script>
+        <script src="../assets/javascript/utils.js"></script>
         <script src="../assets/javascript/corse.js"></script>
         <script src="../assets/javascript/camion.js"></script>
+        <script src="../assets/javascript/carichi.js"></script>
         <script src="gestione-corse.js" defer></script>
         <link href="../assets/css/global.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/css/gestione-corse.css" rel="stylesheet" type="text/css"/>
@@ -25,6 +27,7 @@ $nome = ''
             fetchLoginData();
         </script>
         <!-- i888eddf8 -->
+        <div id="caricoPopup"></div>
 
         <h1>Gestione corse</h1>
         <section>

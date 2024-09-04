@@ -10,6 +10,7 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="jquery.js"></script>
         <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <script src="assets/javascript/common.js"></script>
         <script src="assets/javascript/utils.js"></script>
         <script src="assets/javascript/auth.js"></script>

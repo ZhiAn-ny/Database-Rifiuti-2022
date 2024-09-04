@@ -90,3 +90,26 @@ td {
 hr {
     border: 2px solid;
 }
+
+#toast-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: fixed;
+    top: 0px;
+    right: 10px;
+    margin: 10px;
+    z-index: 1000;
+}
+.toast {
+    padding: 10px;
+    width: 250px;
+    overflow: auto;
+    background: var(--secondary-color-m);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 8px 32px 0 rgba(14, 61, 39, 0.37);
+    font-weight: bold;
+    /* border-left: 5px solid var(--primary-color); */
+}

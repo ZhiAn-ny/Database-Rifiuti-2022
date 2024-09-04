@@ -83,6 +83,7 @@ function addCorsaToList(corsa, cList) {
         btn.innerText = "Assegna rotta";
         btn.onclick = () => {
             // TODO: apri pagina per assegnare rotta
+            toastSuccess();
         }
         cDiv.appendChild(btn);
     }
@@ -116,7 +117,10 @@ function getCarichiSelect(dateTime, tag) {
                 btn.style.color = "var(--primary-color)";
                 btn.onclick = () => {
                     setCaricoCorsa(dateTime, tag, +sel.value)
-                        .then(() => reloadCorseList());
+                        .then(() => {
+                            toggleDialog('caricoPopup');
+                            reloadCorseList();
+                        });
                 }
                 carichiPopup.appendChild(btn);
 
@@ -128,7 +132,10 @@ function getCarichiSelect(dateTime, tag) {
                     addCarico().then(carico => {
                         if (carico != null)
                             setCaricoCorsa(dateTime, tag, +carico.lotto)
-                                .then(() => reloadCorseList());
+                                .then(() => {
+                                    toggleDialog('caricoPopup');
+                                    reloadCorseList();
+                                });
                     })
                 }
                 carichiPopup.appendChild(btn);

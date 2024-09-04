@@ -28,8 +28,9 @@ function addCorsa() {
     const dateTime = new Date(date + "T" + time + ":00");
     const camion = document.getElementById('camionDdl').value;
     addNewCorsa(dateTime, camion)
-        .then(() => reloadCorseList())
-        .catch((err) => console.error(err));
+        .then(ok => {
+            if (ok) reloadCorseList();
+        })
 }
 
 function reloadCorseList() {

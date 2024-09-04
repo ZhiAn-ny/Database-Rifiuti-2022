@@ -113,3 +113,7 @@ hr {
     font-weight: bold;
     /* border-left: 5px solid var(--primary-color); */
 }
+.toast-error {
+    background: rgb(146 21 21 / 71%);
+    color: var(--secondary-color);
+}

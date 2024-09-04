@@ -1,20 +1,18 @@
-async function fetchCorsaByID(codiceinput) {
-    const { data, error } = await getSupabase()
+function fetchCorsaByID(codiceinput) {
+    return getSupabase()
         .rpc('get_stabilimento_info', { stabilimento_code: codiceinput })
-        .single();
-    if (error) console.error(error)
-    else return data
+        .single()
+        .then(res => dataOrNull(res));
 }
 
-async function getAllCorse() {
-    const {data, error} = await getSupabase()
+function getAllCorse() {
+    return getSupabase()
         .from('Corse')
-        .select();
-    if (error) console.error(error)
-    else return data
+        .select()
+        .then(res => dataOrNull(res));
 }
 
-async function addNewCorsa(dataOraInizio, camion) {
+function addNewCorsa(dataOraInizio, camion) {
     return getSupabase()
         .from('Corse')
         .insert([
@@ -26,6 +24,7 @@ async function addNewCorsa(dataOraInizio, camion) {
             }
         ])
         .select()
+        .then(res => dataOrNull(res))
 }
 
 /** @returns {Promise<void>} promise of update. */
@@ -36,6 +35,7 @@ function setCaricoCorsa(dataOraInizio, camion, carico) {
         .eq('inizio', dataOraInizio.toISOString())
         .eq('camion', camion)
         .select()
+        .then(res => dataOrNull(res))
 }
 
 /** @returns {Promise<void>} promise of update. */
@@ -46,5 +46,6 @@ function setRottaCorsa(dataOraInizio, camion, rotta) {
         .eq('inizio', dataOraInizio.toISOString())
         .eq('camion', camion)
         .select()
+        .then(res => dataOrNull(res))
 }
 

@@ -104,29 +104,34 @@ function getCarichiSelect(dateTime, tag) {
                 sel.id = "carichiDdl";
                 sel.style.background = "var(--secondary-color)";
                 addDefaultOption("Scegli carico da assegnare", sel);
-                carichi.forEach((carico) => addOption(carico.lotto, carico.lotto, sel));
+                carichi.forEach((carico) => {
+                    const text = carico.lotto + " (" + carico.peso + ")";
+                    addOption(carico.lotto, carico.lotto, sel)
+                });
                 carichiPopup.appendChild(sel);
                 
-                const btn = document.createElement("button");
+                let btn = document.createElement("button");
                 btn.innerText = "Assegna";
                 btn.style.background = "var(--secondary-color)";
                 btn.style.color = "var(--primary-color)";
-                
                 btn.onclick = () => {
-                    console.log('TODO: Assegna carico');
                     setCaricoCorsa(dateTime, tag, +sel.value)
+                        .then(() => reloadCorseList());
                 }
                 carichiPopup.appendChild(btn);
 
-                // if (carichiPopup.children.length == 0) {
-                //     let p = document.createElement("p");
-                //     p.innerText = "Nessun carico disponibile.";
-                //     p.style.textAlign = "center";
-                //     p.style.color = "var(--secondary-color)";
-                //     p.style.fontWeight = "bold";
-                //     p.style.marginTop = "20%";
-                //     carichiPopup.appendChild(p);
-                // }
+                btn = document.createElement("button");
+                btn.innerText = "Crea nuovo carico";
+                btn.style.background = "var(--secondary-color)";
+                btn.style.color = "var(--primary-color)";
+                btn.onclick = () => {
+                    addCarico().then(carico => {
+                        if (carico != null)
+                            setCaricoCorsa(dateTime, tag, +carico.lotto)
+                                .then(() => reloadCorseList());
+                    })
+                }
+                carichiPopup.appendChild(btn);
             });
         }
     });

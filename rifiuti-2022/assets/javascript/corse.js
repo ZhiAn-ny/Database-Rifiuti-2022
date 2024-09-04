@@ -28,17 +28,23 @@ async function addNewCorsa(dataOraInizio, camion) {
         .select()
 }
 
+/** @returns {Promise<void>} promise of update. */
 function setCaricoCorsa(dataOraInizio, camion, carico) {
-    console.log('set', dataOraInizio, camion, carico)
     return getSupabase()
         .from('Corse')
-        .where('camion', camion)
-        .where('inizio', dataOraInizio)
-        .update({carico: carico})
+        .update({ carico: carico })
+        .eq('inizio', dataOraInizio.toISOString())
+        .eq('camion', camion)
         .select()
-    
 }
 
+/** @returns {Promise<void>} promise of update. */
 function setRottaCorsa(dataOraInizio, camion, rotta) {
+    return getSupabase()
+        .from('Corse')
+        .update({ rotta: rotta })
+        .eq('inizio', dataOraInizio.toISOString())
+        .eq('camion', camion)
+        .select()
 }
 

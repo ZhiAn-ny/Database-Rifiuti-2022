@@ -115,3 +115,17 @@ async function addButtonAccettazione(row, row_data) {
         ]);
     }, btn);
 }
+
+function addCarico() {
+    return getSupabase()
+        .from('Carichi')
+        .insert([ { stato: 'Creato', peso: 0 } ])
+        .select()
+        .then(resp => {
+            if (resp.error) {
+                console.error(resp.error);
+                return null;
+            }
+            return resp.data[0];
+        })
+}

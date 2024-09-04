@@ -9,6 +9,7 @@ function getAllCorse() {
     return getSupabase()
         .from('Corse')
         .select()
+        .order('inizio', { ascending: true })
         .then(res => dataOrNull(res));
 }
 

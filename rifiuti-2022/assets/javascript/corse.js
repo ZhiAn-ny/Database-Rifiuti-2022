@@ -8,7 +8,12 @@ function fetchCorsaByID(codiceinput) {
 function getAllCorse() {
     return getSupabase()
         .from('Corse')
-        .select()
+        .select(`
+            inizio, camion,
+            carico, rotta,
+            Rotte (codice, descrizione),
+            Carichi (lotto, peso)
+        `)
         .order('inizio', { ascending: true })
         .then(res => dataOrNull(res));
 }

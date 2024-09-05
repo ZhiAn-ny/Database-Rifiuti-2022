@@ -62,7 +62,7 @@ function addCorsaToList(corsa, cList) {
 
     if (corsa.carico) {
         const lot = document.createElement("span");
-        lot.innerText = corsa.carico
+        lot.innerText = corsa.carico + " (" + corsa.Carichi.peso + " kg)"
         cDiv.appendChild(lot);
     } else {
         const btn = document.createElement("button");
@@ -76,7 +76,7 @@ function addCorsaToList(corsa, cList) {
 
     if (corsa.rotta) {
         const rotta = document.createElement("span");
-        rotta.innerText = corsa.rotta
+        rotta.innerText = corsa.Rotte.descrizione
         cDiv.appendChild(rotta);
     } else {
         const btn = document.createElement("button");

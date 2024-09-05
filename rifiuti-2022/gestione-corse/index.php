@@ -29,6 +29,7 @@ $nome = ''
         </script>
         <!-- i888eddf8 -->
         <div id="caricoPopup"></div>
+        <div id="routePopup"></div>
 
         <h1>Gestione corse</h1>
         <section>

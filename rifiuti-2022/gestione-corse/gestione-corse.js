@@ -1,6 +1,11 @@
 const carichiPopup = document.getElementById('caricoPopup');
+const routePopup = document.getElementById('caricoPopup');
 createDialogFrom(
     'caricoPopup', 
+    'padding: 50px; width: 20%; gap: 30px; left: 35%;'
+);
+createDialogFrom(
+    'routePopup', 
     'padding: 50px; width: 20%; gap: 30px; left: 35%;'
 );
 
@@ -63,13 +68,7 @@ function addCorsaToList(corsa, cList) {
         const btn = document.createElement("button");
         btn.innerText = "Assegna carico";
         btn.onclick = (event) => {
-            // TODO: apri pagina per assegnare carico
-            let dateStr = event.target.parentElement.children[0].innerText;
-            let [date, time] = dateStr.split(', ');
-            let [day, month, year] = date.split('/');
-            date = month + "/" + day + "/" + year;
-            const dateTime = new Date(date + "Z" + time + "+2");
-            const tag = event.target.parentElement.children[1].innerText;
+            const {dateTime, tag} = getDateTag(event);
             getCarichiSelect(dateTime, tag)
         }
         cDiv.appendChild(btn);
@@ -82,9 +81,10 @@ function addCorsaToList(corsa, cList) {
     } else {
         const btn = document.createElement("button");
         btn.innerText = "Assegna rotta";
-        btn.onclick = () => {
+        btn.onclick = (event) => {
             // TODO: apri pagina per assegnare rotta
-            toastSuccess();
+            const {dateTime, tag} = getDateTag(event);
+            getRotteSelect(dateTime, tag)
         }
         cDiv.appendChild(btn);
     }
@@ -95,6 +95,16 @@ function addCorsaToList(corsa, cList) {
     cDiv.appendChild(btn);
 
     cList.appendChild(cDiv);
+}
+
+function getDateTag(event) {
+    let dateStr = event.target.parentElement.children[0].innerText;
+    let [date, time] = dateStr.split(', ');
+    let [day, month, year] = date.split('/');
+    date = month + "/" + day + "/" + year;
+    const dateTime = new Date(date + "Z" + time + "+2");
+    const tag = event.target.parentElement.children[1].innerText;
+    return {dateTime, tag};
 }
 
 function getCarichiSelect(dateTime, tag) {
@@ -118,7 +128,8 @@ function getCarichiSelect(dateTime, tag) {
                 btn.style.color = "var(--primary-color)";
                 btn.onclick = () => {
                     setCaricoCorsa(dateTime, tag, +sel.value)
-                        .then(() => {
+                        .then((ok) => {
+                            if (ok) toastSuccess('Carico assegnato');
                             toggleDialog('caricoPopup');
                             reloadCorseList();
                         });
@@ -130,17 +141,28 @@ function getCarichiSelect(dateTime, tag) {
                 btn.style.background = "var(--secondary-color)";
                 btn.style.color = "var(--primary-color)";
                 btn.onclick = () => {
-                    addCarico().then(carico => {
-                        if (carico != null)
-                            setCaricoCorsa(dateTime, tag, +carico.lotto)
-                                .then(() => {
-                                    toggleDialog('caricoPopup');
-                                    reloadCorseList();
-                                });
-                    })
-                }
+                    addCarico()
+                        .then(carico => {
+                            if (carico != null) {
+                                setCaricoCorsa(dateTime, tag, +carico.lotto)
+                                    .then((ok) => {
+                                        if (ok) toastSuccess('Carico assegnato');
+                                        toggleDialog('caricoPopup');
+                                        reloadCorseList();
+                                    });
+                            }
+                        })
+                    }
                 carichiPopup.appendChild(btn);
             });
+        }
+    });
+}
+
+function getRotteSelect(dateTime, tag) {
+    toggleDialog('routePopup').then(visible => {
+        if (visible) {
+            
         }
     });
 }

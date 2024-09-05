@@ -145,7 +145,9 @@ function createDialogFrom(elementId, extraStyle = "") {
     container.hidden = true;
 }
 
-/** @returns a promise indicating if the container is visible. */
+/** Be sure to call `createDialogFrom()` to initialize the dialog.
+ * @returns a promise indicating if the container is visible.
+ * */
 function toggleDialog(elementId) {
     const container = document.getElementById(elementId);
     container.hidden = !container.hidden;

@@ -130,7 +130,8 @@ function booleanToTicks(bool) {
 function createDialogFrom(elementId, extraStyle = "") {
     const container = document.getElementById(elementId);
     let style = "height: 200px; width: 70%;" 
-        + "background: var(--primary-color-m); position: absolute;"
+        + "background: var(--primary-color-m);"
+        + "position: fixed;"
         + "top: 40px; left: 15%;"
         + "border: 1px solid rgba(255, 255, 255, 0.18);"
         + "border-radius: 10px;"

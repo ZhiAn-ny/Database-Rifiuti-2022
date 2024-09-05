@@ -117,3 +117,20 @@ hr {
     background: rgb(146 21 21 / 71%);
     color: var(--secondary-color);
 }
+
+::-webkit-scrollbar {
+    width: 7px; /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: var(--primary-color-l); /* color of the tracking area */
+    border-radius: 3px;
+    border: 1px solid var(--primary-color-l);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color-m); /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 2px solid transparent; /* creates padding around scroll thumb */
+}
+  

@@ -151,6 +151,11 @@ function toggleDialog(elementId) {
     container.hidden = !container.hidden;
     if (!container.hidden) {
         container.style.display = "flex";
+        let closeBtn = document.createElement('button');
+        closeBtn.innerText = 'X'
+        closeBtn.classList.add('close-btn');
+        closeBtn.onclick = () => toggleDialog(elementId);
+        container.appendChild(closeBtn);
     } else {
         container.style.display = "none";
         while (container.firstChild) {

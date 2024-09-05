@@ -7,6 +7,7 @@
     --primary-color-l: #0E3D271E;
     --secondary-color: #F2F5E6;
     --secondary-color-m: #F2F5E6AB;
+    --secondary-color-l: #F2F5E61E;
 }
 
 body {
@@ -32,6 +33,20 @@ button:disabled {
 }
 button:hover {
     background-color: var(--primary-color-m);
+}
+
+.close-btn {
+    background: transparent;
+    color: var(--secondary-color-m);
+    width: fit-content;
+    padding: 0px;
+    position: fixed;
+    top: 20px;
+    left: 7%;
+}
+.close-btn:hover {
+    color: var(--secondary-color);
+    background-color: transparent;
 }
 
 input {

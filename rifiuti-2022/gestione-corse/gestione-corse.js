@@ -1,5 +1,5 @@
 const carichiPopup = document.getElementById('caricoPopup');
-const routePopup = document.getElementById('caricoPopup');
+const routePopup = document.getElementById('routePopup');
 createDialogFrom(
     'caricoPopup', 
     'padding: 50px; width: 20%; gap: 30px; left: 35%;'
@@ -111,58 +111,85 @@ function getCarichiSelect(dateTime, tag) {
     toggleDialog('caricoPopup').then(visible => {
         if (visible) {
             getAllCarichi().then(carichi => {
-                const sel = document.createElement('select');
-                sel.name = "carichiDdl";
-                sel.id = "carichiDdl";
-                sel.style.background = "var(--secondary-color)";
-                addDefaultOption("Scegli carico da assegnare", sel);
+                const sel = getPopupSelect("carichiDdl", "Scegli carico da assegnare");
                 carichi.forEach((carico) => {
-                    const text = carico.lotto + " (" + carico.peso + ")";
-                    addOption(carico.lotto, carico.lotto, sel)
+                    const text = carico.lotto + " (" + carico.peso + " kg)";
+                    addOption(carico.lotto, text, sel)
                 });
                 carichiPopup.appendChild(sel);
                 
-                let btn = document.createElement("button");
-                btn.innerText = "Assegna";
-                btn.style.background = "var(--secondary-color)";
-                btn.style.color = "var(--primary-color)";
-                btn.onclick = () => {
-                    setCaricoCorsa(dateTime, tag, +sel.value)
-                        .then((ok) => {
-                            if (ok) toastSuccess('Carico assegnato');
-                            toggleDialog('caricoPopup');
-                            reloadCorseList();
-                        });
-                }
+                let btn = getPopupBtn("Assegna");
+                btn.onclick = () => assignCaricoAndClosePopup(dateTime, tag, +sel.value);
                 carichiPopup.appendChild(btn);
 
-                btn = document.createElement("button");
-                btn.innerText = "Crea nuovo carico";
-                btn.style.background = "var(--secondary-color)";
-                btn.style.color = "var(--primary-color)";
+                btn = getPopupBtn("Crea nuovo carico")
                 btn.onclick = () => {
-                    addCarico()
-                        .then(carico => {
-                            if (carico != null) {
-                                setCaricoCorsa(dateTime, tag, +carico.lotto)
-                                    .then((ok) => {
-                                        if (ok) toastSuccess('Carico assegnato');
-                                        toggleDialog('caricoPopup');
-                                        reloadCorseList();
-                                    });
-                            }
-                        })
-                    }
+                    addCarico().then(carico => {
+                        if (carico != null) {
+                            assignCaricoAndClosePopup(dateTime, tag, +carico.lotto);
+                        }
+                    })
+                }
                 carichiPopup.appendChild(btn);
             });
         }
     });
 }
 
+function assignCaricoAndClosePopup(dateTime, tag, lot) {
+    setCaricoCorsa(dateTime, tag, lot)
+        .then((ok) => {
+            if (ok) toastSuccess('Carico assegnato');
+            toggleDialog('caricoPopup');
+            reloadCorseList();
+        });
+}
+
+function assignRouteAndClosePopup(dateTime, tag, routeId) {
+    setRottaCorsa(dateTime, tag, routeId)
+        .then((ok) => {
+            if (ok) toastSuccess('Rotta assegnata');
+            toggleDialog('routePopup');
+            reloadCorseList();
+        });
+}
+
+function getPopupBtn(text) {
+    const btn = document.createElement("button");
+    btn.innerText = text;
+    btn.style.background = "var(--secondary-color)";
+    btn.style.color = "var(--primary-color)";
+    return btn;
+}
+
+function getPopupSelect(selectId, placeholder) {
+    const sel = document.createElement('select');
+    sel.name = selectId;
+    sel.id = selectId;
+    sel.style.background = "var(--secondary-color)";
+    addDefaultOption(placeholder, sel);
+    return sel;
+}
+
 function getRotteSelect(dateTime, tag) {
     toggleDialog('routePopup').then(visible => {
         if (visible) {
-            
+            getAllRoutes().then(routes => {
+                const sel = getPopupSelect("routesDdl", "Scegli rotta da assegnare");
+                routes.forEach((route) => addOption(route.codice, route.descrizione, sel));
+                routePopup.appendChild(sel);
+
+                let btn = getPopupBtn("Assegna");
+                btn.onclick = () => assignRouteAndClosePopup(dateTime, tag, +sel.value);
+                routePopup.appendChild(btn);
+
+                btn = getPopupBtn("Apri gestione rotte");
+                btn.onclick = () => {
+                    // TODO
+                    console.error("To implement")
+                }
+                routePopup.appendChild(btn);
+            })
         }
     });
 }

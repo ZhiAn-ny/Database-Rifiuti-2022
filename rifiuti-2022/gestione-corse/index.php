@@ -16,6 +16,7 @@ $nome = ''
         <script src="../assets/javascript/auth.js"></script>
         <script src="../assets/javascript/utils.js"></script>
         <script src="../assets/javascript/corse.js"></script>
+        <script src="../assets/javascript/rotte.js"></script>
         <script src="../assets/javascript/camion.js"></script>
         <script src="../assets/javascript/carichi.js"></script>
         <script src="gestione-corse.js" defer></script>

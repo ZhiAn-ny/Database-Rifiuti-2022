@@ -62,10 +62,14 @@ button {
     flex-direction: column;
     gap: 5px;
 }
-
 .user-row {
     background: var(--primary-color-l);
     border-radius: 5px;
     padding: 5px 20px;
     margin: 5px;
+}
+
+#assignUserForm {
+    margin: 2rem 0px;
+    display: flex;
 }

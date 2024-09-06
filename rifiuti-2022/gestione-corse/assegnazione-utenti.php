@@ -16,6 +16,7 @@ $nome = ''
         <script src="../assets/javascript/utils.js"></script>
         <script src="../assets/javascript/auth.js"></script>
         <script src="../assets/javascript/corse.js"></script>
+        <script src="../assets/javascript/utenti.js"></script>
         <script src="assegnazione-utenti.js" defer></script>
         <link href="../assets/css/global.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/css/gestione-corse.css" rel="stylesheet" type="text/css"/>
@@ -28,8 +29,15 @@ $nome = ''
         <!-- i888eddf8 -->
 
         <h1 id="page-title"></h1>
-
         <section id="users-container"></section>
-       
+        
+        <section>
+            <form id="assignUserForm">
+                <select id="user-select"></select>
+                
+
+            </form>
+        </section>
+        
     </body>
 </html>

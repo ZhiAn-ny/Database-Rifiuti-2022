@@ -39,6 +39,5 @@ async function getStabilimentiPerUtente(user) {
             t.stabilimento === value.stabilimento && t.zona === value.zona && t.comune === value.comune
         ))
     );
-
     return filteredData;
 }

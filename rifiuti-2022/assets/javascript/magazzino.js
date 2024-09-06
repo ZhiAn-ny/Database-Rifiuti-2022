@@ -1,20 +1,22 @@
 async function fetchMagazzinoRifiuti() {
     try {
         const user = getLoginInfo();
-        console.log(user);
         const stabilimenti = await getStabilimentiPerUtente(user);
-        console.log(stabilimenti);
+        const container = document.getElementById('tableContainer');
         for (const stabilimento of stabilimenti) {
+            const infoStabilimento = await fetchStabilimentoByID_Zona_Comune(stabilimento.stabilimento, stabilimento.zona, stabilimento.comune);
             const rifiuti = await fetchRifiutiByMagazzino(stabilimento.stabilimento, stabilimento.zona, stabilimento.comune);
-            console.log(stabilimento.stabilimento, stabilimento.zona, stabilimento.comune, rifiuti);
-            if(rifiuti.length > 0) {
-                let resultsTable = document.getElementById('magazzinoTable');
-                createTableHeader(resultsTable, ["Data raccolta", "Data consegna", "Tipo rifiuto", "Descrizione", "Quantità", "Peso (Kg)", "Ingombrante", "Pericoloso", "Riciclabile"]);
-                
-                for (const rifiuto of rifiuti) {
-                    console.log(rifiuto);
-                    const newRow = document.createElement('tr');
         
+            if (rifiuti.length > 0) {
+                let table = document.createElement('table');
+                table.id = `table-${stabilimento.stabilimento}`;
+                table.className = 'magazzinoTable';
+
+                createTableHeader(table, ["Data raccolta", "Data consegna", "Tipo rifiuto", "Descrizione", "Quantità", "Peso (Kg)", "Ingombrante", "Pericoloso", "Riciclabile"]);
+
+                for (const rifiuto of rifiuti) {
+                    const newRow = document.createElement('tr');
+                    
                     addCell(newRow, formatDate(rifiuto.data_carico));
                     addCell(newRow, formatDate(rifiuto.data_scarico));
                     addCell(newRow, rifiuto.tipo_rifiuto);
@@ -24,9 +26,19 @@ async function fetchMagazzinoRifiuti() {
                     addCell(newRow, booleanToTicks(rifiuto.ingombrante));
                     addCell(newRow, booleanToTicks(rifiuto.pericoloso));
                     addCell(newRow, booleanToTicks(rifiuto.riciclabile));
+                    let btn = document.createElement("button");
+                    addButtonCell(newRow, "Smaltisci", async function () {
+                        redirectToPage('magazzino/smaltimento.php', user, { rifiuto: rifiuto })
+                    }, btn);
         
-                    resultsTable.appendChild(newRow);
+                    table.appendChild(newRow);
                 }
+
+                const tableLabel = document.createElement('h3');
+                tableLabel.innerText = infoStabilimento.stabilimento + " - " + infoStabilimento.comune + ", " + infoStabilimento.zona;
+                container.appendChild(tableLabel);
+
+                container.appendChild(table);
             }
         }
     } catch (error) { }

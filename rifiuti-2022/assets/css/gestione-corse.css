@@ -56,3 +56,16 @@ form div input, form div select {
 button {
     width: 100%;
 }
+
+#user-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.user-row {
+    background: var(--primary-color-l);
+    border-radius: 5px;
+    padding: 5px 20px;
+    margin: 5px;
+}

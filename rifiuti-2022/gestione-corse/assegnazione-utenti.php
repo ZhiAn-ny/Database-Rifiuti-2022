@@ -11,10 +11,14 @@ $nome = ''
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="../jquery.js"></script>
         <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <script src="../assets/javascript/common.js"></script>
+        <script src="../assets/javascript/utils.js"></script>
         <script src="../assets/javascript/auth.js"></script>
         <script src="../assets/javascript/corse.js"></script>
+        <script src="assegnazione-utenti.js" defer></script>
         <link href="../assets/css/global.css" rel="stylesheet" type="text/css"/>
+        <link href="../assets/css/gestione-corse.css" rel="stylesheet" type="text/css"/>
         <title>La tua Dashboard</title>
     </head>
     <body>
@@ -23,7 +27,9 @@ $nome = ''
         </script>
         <!-- i888eddf8 -->
 
-        <h1>TODO</h1>
+        <h1 id="page-title"></h1>
+
+        <section id="users-container"></section>
        
     </body>
 </html>

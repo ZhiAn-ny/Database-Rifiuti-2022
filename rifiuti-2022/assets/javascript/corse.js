@@ -18,6 +18,40 @@ function getAllCorse() {
         .then(res => dataOrNull(res));
 }
 
+function getCorsa(dataOraInizio, camion) {
+    return getSupabase()
+        .from("Corse")
+        .eq('inizio', dataOraInizio.toISOString())
+        .eq('camion', camion)
+        .select()
+        .then(res => dataOrNull(res));
+}
+
+function getUtentiCorsa(dataOraInizio, camion) {
+    return getSupabase()
+        .from("Utenti")
+        .select(`
+            cf, nome, cognome,
+            Esecuzione (utente, guida, inizio, camion)
+        `)
+        .then(res => dataOrNull(res))
+        .then(datarow => datarow.flatMap(u => 
+            u.Esecuzione.map(e => (
+                {
+                    inizio: new Date(e.inizio),
+                    camion: e.camion,
+                    guida: e.guida,
+                    cf: u.cf,
+                    nome: u.nome,
+                    cognome: u.cognome
+                }
+            ))
+        ))
+        .then(exes => exes.filter(e => 
+            e.camion == camion && e.inizio.toISOString() == dataOraInizio.toISOString()
+        ));
+}
+
 function addNewCorsa(dataOraInizio, camion) {
     return getSupabase()
         .from('Corse')

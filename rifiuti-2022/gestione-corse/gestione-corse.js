@@ -82,7 +82,6 @@ function addCorsaToList(corsa, cList) {
         const btn = document.createElement("button");
         btn.innerText = "Assegna rotta";
         btn.onclick = (event) => {
-            // TODO: apri pagina per assegnare rotta
             const {dateTime, tag} = getDateTag(event);
             getRotteSelect(dateTime, tag)
         }
@@ -91,7 +90,14 @@ function addCorsaToList(corsa, cList) {
 
     const btn = document.createElement("button");
     btn.innerText = "Assegna utenti";
-    btn.onclick = () => redirectToPage("assegnazione-utenti.php", getLoginInfo());
+    btn.onclick = (event) => {
+        const {dateTime, tag} = getDateTag(event);
+        redirectToPage(
+            "assegnazione-utenti.php",
+            getLoginInfo(),
+            {inizio: dateTime, camion: tag}
+        );
+    }
     cDiv.appendChild(btn);
 
     cList.appendChild(cDiv);

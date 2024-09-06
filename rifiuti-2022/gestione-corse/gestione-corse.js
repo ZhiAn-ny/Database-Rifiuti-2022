@@ -178,16 +178,8 @@ function getRotteSelect(dateTime, tag) {
                 const sel = getPopupSelect("routesDdl", "Scegli rotta da assegnare");
                 routes.forEach((route) => addOption(route.codice, route.descrizione, sel));
                 routePopup.appendChild(sel);
-
                 let btn = getPopupBtn("Assegna");
                 btn.onclick = () => assignRouteAndClosePopup(dateTime, tag, +sel.value);
-                routePopup.appendChild(btn);
-
-                btn = getPopupBtn("Apri gestione rotte");
-                btn.onclick = () => {
-                    // TODO
-                    console.error("To implement")
-                }
                 routePopup.appendChild(btn);
             })
         }

@@ -34,7 +34,15 @@ $nome = ''
         <section>
             <form id="assignUserForm">
                 <select id="user-select"></select>
-                
+
+                <container class="switch-container">
+                    <label>Addetto raccolta</label>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <label>Guidatore</label>
+                </container>
 
             </form>
         </section>

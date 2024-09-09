@@ -9,21 +9,24 @@ pageTitle.innerText = `Assegnazione utenti alla corsa del ${corsaPK.inizio.toLoc
 const userSelect = document.getElementById('user-select');
 addDefaultOption('Seleziona utente', userSelect);
 
-getAllUsers().then(users => 
-    users.forEach(u => addOption(
-        u.cf,
-        u.nome + ' ' + u.cognome + ' (' + u.cf + ')',
-        userSelect
-    )
-));
+let assignedUsers = [];
+let switchValue = false;
 
-loadAssignedUsers();
-
-
+loadAssignedUsers().then(() => {
+    getAllUsers().then(users => 
+        users.filter(u => assignedUsers.indexOf(u.cf) == -1)
+        .sort((u1,u2) => u1.nome.localeCompare(u2.nome))
+        .forEach(u => addOption(
+            u.cf,
+            u.nome + ' ' + u.cognome + ' (' + u.cf + ')',
+            userSelect
+        )
+    ));
+})
 
 
 function loadAssignedUsers() {
-    getUtentiCorsa(corsaPK.inizio, corsaPK.camion)
+    return getUtentiCorsa(corsaPK.inizio, corsaPK.camion)
     .then(r => {
         usersContainer.innerHTML = '';
         console.log(r)
@@ -41,10 +44,27 @@ function loadAssignedUsers() {
                     row.innerText += ' (guida)';
                 }
                 usersContainer.appendChild(row);
+                assignedUsers.push(u.cf);
             })
         }
     });
 }
 
+let debouncing = false;
+function toggleSwitch() {
+    if (!debouncing) {
+        debouncing = true;
+        switchValue = !switchValue;
+        setTimeout(() => {
+            debouncing = false;
+        }, 100);
+    }
+}
+
+function assignUser() {
+    const userCF = userSelect.value;
+    const isDriving = switchValue;
+    addEsecuzione(corsaPK.inizio, corsaPK.camion, userCF, isDriving);
+}
 
 

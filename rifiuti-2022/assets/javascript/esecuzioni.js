@@ -28,7 +28,6 @@ async function fetchEsecuzione() {
     }
 }
 
-
 async function fetchEsecuzione_Proprie() {
     let loginInfo = getLoginInfo();
 
@@ -87,4 +86,24 @@ async function fetchEsecuzione_Proprie() {
             } catch (err) { }
         }
     }
+}
+
+function addEsecuzione(inizioCorsa, camion, user, isDriving) {
+    return getSupabase()
+        .from('Esecuzione')
+        .insert([ { 
+            utente: user, 
+            camion: camion, 
+            inizio: inizioCorsa.toISOString(), 
+            guida: isDriving 
+        } ])
+        .select()
+        .then(resp => {
+            if (resp.error) {
+                console.error(resp.error);
+                return null;
+            }
+            console.log('ok')
+            return resp.data[0];
+        })
 }

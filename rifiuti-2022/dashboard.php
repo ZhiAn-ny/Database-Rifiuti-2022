@@ -34,6 +34,7 @@ $nome = ''
             <button onclick="redirectToPage('esecuzione', getLoginInfo())">Esecuzione corse</button>
             <button onclick="redirectToPage('gestione-corse', getLoginInfo())">Gestione corse</button>
             <button onclick="redirectToPage('magazzino.php', getLoginInfo())">Magazzino</button>
+            <button onclick="redirectToPage('statistiche', getLoginInfo())">Statistiche aziendali</button>
         </section>
     </body>
 </html>

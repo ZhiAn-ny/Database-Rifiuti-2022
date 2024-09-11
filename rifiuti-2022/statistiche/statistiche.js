@@ -1,3 +1,4 @@
+const MAX_DATA_VISUALIZED = 10;
 const chartContainer = document.getElementById('chart-container');
 
 const chartConfig = {
@@ -23,19 +24,29 @@ initChartContainer();
 
 function initChartContainer() {
   chartContainer.innerHTML = `<div class="spinner"></div>`;
-  setTimeout(() => {
+  getRifiutiStorageStats().then((stats) => {
+    console.log(stats);
     chartContainer.innerHTML = `<canvas id="rifiuti-x-tipologie"></canvas>`;
-    initChart();
-  }, 3000);
+    initChart(stats);
+  });
 }
 
-function initChart() {
+function initChart(stats) {
   const ctx = document.getElementById('rifiuti-x-tipologie');
+  let cat = new Map();
+  stats.forEach(item => {
+    cat.set(item.tipologia_des, (cat.get(item.tipologia_des) || 0) + item.peso_totale);
+  });
+  const sorted = [...cat.entries()]
+    .sort((e1, e2) => e2[1] - e1[1])
+    .slice(0, MAX_DATA_VISUALIZED);
+  cat = new Map(sorted);
+
   chartConfig.data = {
-    labels: ['Organico', 'Carta', 'Vetro', 'Plastica', 'Indifferenziata'],
+    labels: [...cat.keys()],
     datasets: [{
       label: ' kg',
-      data: [12, 19, 3, 5, 2, 3]
+      data: [...cat.values()]
     }]  
   }
   new Chart(ctx, chartConfig);

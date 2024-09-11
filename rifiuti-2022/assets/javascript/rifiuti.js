@@ -72,3 +72,9 @@ async function handleRifiutiDropdown() {
         select.appendChild(option);
     });
 }
+
+function getRifiutiStorageStats() {
+    return getSupabase()
+        .rpc('get_storage_stats', {  })
+        .then(res => dataOrNull(res));
+}

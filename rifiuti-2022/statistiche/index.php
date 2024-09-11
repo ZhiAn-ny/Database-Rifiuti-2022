@@ -16,6 +16,7 @@ $nome = ''
         <script src="../assets/javascript/common.js"></script>
         <script src="../assets/javascript/auth.js"></script>
         <script src="../assets/javascript/utils.js"></script>
+        <script src="../assets/javascript/rifiuti.js"></script>
         <script src="statistiche.js" defer></script>
         <link href="../assets/css/global.css" rel="stylesheet" type="text/css"/>
         <title>Statistiche aziendali</title>
@@ -28,7 +29,9 @@ $nome = ''
 
         
         <section class="flex-row">
-            <h2>Rifiuti trattati</h2>
+            <div>
+                <h2>Rifiuti trattati</h2>
+            </div>
             <div id="chart-container">
                 <!-- <div class="spinner"></div> -->
                 <!-- <canvas id="rifiuti-x-tipologie"></canvas> -->

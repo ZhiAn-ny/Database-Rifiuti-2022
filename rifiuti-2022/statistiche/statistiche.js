@@ -27,6 +27,7 @@ function initChartContainer() {
     initSelect(stats);
     chartContainer.innerHTML = `<canvas id="rifiuti-x-tipologie"></canvas>`;
     initChart(stats);
+    showTotalWeight(stats);
   });
 }
 
@@ -49,7 +50,6 @@ function initChart(stats) {
     .sort((e1, e2) => e2[1] - e1[1])
     .slice(0, MAX_DATA_VISUALIZED);
   cat = new Map(sorted);
-
   chartConfig.data = {
     labels: [...cat.keys()],
     datasets: [{
@@ -60,6 +60,12 @@ function initChart(stats) {
   chartEl = new Chart(ctx, chartConfig);
 }
 
+function showTotalWeight(stats) {
+  const pesoTotParag = document.getElementById('peso-totale');
+  const w = stats.reduce((acc, item) => acc + item.peso_totale, 0).toFixed(2);
+  pesoTotParag.innerHTML = `Il peso totale dei rifiuti è di ${w} kg`;
+}
+
 function filterData() {
   const value = select.value;
   let toViz = lastLoadedStats
@@ -68,4 +74,5 @@ function filterData() {
   }
   chartEl.destroy();
   initChart(toViz);
+  showTotalWeight(toViz);
 }

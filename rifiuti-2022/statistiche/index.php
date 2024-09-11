@@ -17,6 +17,7 @@ $nome = ''
         <script src="../assets/javascript/auth.js"></script>
         <script src="../assets/javascript/utils.js"></script>
         <script src="../assets/javascript/rifiuti.js"></script>
+        <script src="../assets/javascript/utenti.js"></script>
         <script src="statistiche.js" defer></script>
         <link href="../assets/css/global.css" rel="stylesheet" type="text/css"/>
         <title>Statistiche aziendali</title>
@@ -30,13 +31,23 @@ $nome = ''
         
         <section class="flex-row">
             <div>
-                <h2>Rifiuti trattati</h2>
+                <h2>Statistiche rifiuti</h2>
+                <h3>Rifiuti trattati</h3>
                 <label for="rxt-viz-select">Filtra per stabiliemnto:</label>
                 <select id="rxt-viz-select" onchange="filterData()"></select>
+
+                <p id="peso-totale">Peso dei totale dei rifiuti trattati:</p>
             </div>
             <div id="chart-container">
                 <!-- <div class="spinner"></div> -->
                 <!-- <canvas id="rifiuti-x-tipologie"></canvas> -->
+            </div>
+        </section>
+        
+        <section>
+            <h2>Statistiche utenti</h2>
+            <div id="user-chart-container">
+                <canvas id="user-chart"></canvas>
             </div>
         </section>
     </body>

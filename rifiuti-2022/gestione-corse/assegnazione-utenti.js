@@ -7,22 +7,11 @@ const pageTitle = document.getElementById('page-title');
 pageTitle.innerText = `Assegnazione utenti alla corsa del ${corsaPK.inizio.toLocaleString()} - con camion ${corsaPK.camion}`;
 
 const userSelect = document.getElementById('user-select');
-addDefaultOption('Seleziona utente', userSelect);
 
 let assignedUsers = [];
 let switchValue = false;
 
-loadAssignedUsers().then(() => {
-    getAllUsers().then(users => 
-        users.filter(u => assignedUsers.indexOf(u.cf) == -1)
-        .sort((u1,u2) => u1.nome.localeCompare(u2.nome))
-        .forEach(u => addOption(
-            u.cf,
-            u.nome + ' ' + u.cognome + ' (' + u.cf + ')',
-            userSelect
-        )
-    ));
-})
+loadAssignedUsers().then(() => reloadSelectOptions());
 
 
 function loadAssignedUsers() {
@@ -50,6 +39,22 @@ function loadAssignedUsers() {
     });
 }
 
+function reloadSelectOptions() {
+    while (userSelect.hasChildNodes()) {
+        userSelect.removeChild(userSelect.lastChild);
+    }
+    addDefaultOption('Seleziona utente', userSelect);
+    getAllUsers().then(users => 
+        users.filter(u => assignedUsers.indexOf(u.cf) == -1)
+        .sort((u1,u2) => u1.nome.localeCompare(u2.nome))
+        .forEach(u => addOption(
+            u.cf,
+            u.nome + ' ' + u.cognome + ' (' + u.cf + ')',
+            userSelect
+        )
+    ));
+}
+
 let debouncing = false;
 function toggleSwitch() {
     if (!debouncing) {
@@ -64,7 +69,13 @@ function toggleSwitch() {
 function assignUser() {
     const userCF = userSelect.value;
     const isDriving = switchValue;
-    addEsecuzione(corsaPK.inizio, corsaPK.camion, userCF, isDriving);
+    addEsecuzione(corsaPK.inizio, corsaPK.camion, userCF, isDriving)
+    .then(() => {
+        loadAssignedUsers().then(() => reloadSelectOptions());
+    });
 }
 
-
+function back() {
+    console.log('back');
+    redirectToPageGlobal('gestione-corse', getLoginInfo());
+}

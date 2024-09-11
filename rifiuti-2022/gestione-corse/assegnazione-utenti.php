@@ -28,6 +28,7 @@ $nome = ''
             fetchLoginData();
         </script>
         <!-- i888eddf8 -->
+         <button onclick="back()" class="text-btn"><< Torna alla gestione delle corse</button>
 
         <h1 id="page-title"></h1>
         <section id="users-container"></section>

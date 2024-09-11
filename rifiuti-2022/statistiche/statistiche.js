@@ -5,20 +5,13 @@ const select = document.getElementById('rxt-viz-select');
 let lastLoadedStats = null;
 let chartEl = null;
 const stabilimenti = new Map();
-const chartConfig = {
-  type: 'doughnut',
-  options: {
-    elements: {
-      arc: {
-        backgroundColor: ['#0E3D27FF', '#0E3D27DB', '#0E3D27B3', '#0E3D278B', '#0E3D2763', '#0E3D273B'],
-        borderColor: '#F2F5E6'
-      }
-    }
-  },
-  data: {}
-}
+
 
 initChartContainer();
+
+getStatsUtentiCorse()
+  .then((stats) => getUserCorseChart(stats));
+
 
 function initChartContainer() {
   chartContainer.innerHTML = `<div class="spinner"></div>`;
@@ -42,6 +35,18 @@ function initSelect(stats) {
 
 function initChart(stats) {
   const ctx = document.getElementById('rifiuti-x-tipologie');
+  const chartConfig = {
+    type: 'doughnut',
+    options: {
+      elements: {
+        arc: {
+          backgroundColor: ['#0E3D27FF', '#0E3D27DB', '#0E3D27B3', '#0E3D278B', '#0E3D2763', '#0E3D273B'],
+          borderColor: '#F2F5E6'
+        }
+      }
+    },
+    data: {}
+  }
   let cat = new Map();
   stats.forEach(item => {
     cat.set(item.tipologia_des, (cat.get(item.tipologia_des) || 0) + item.peso_totale);
@@ -75,4 +80,22 @@ function filterData() {
   chartEl.destroy();
   initChart(toViz);
   showTotalWeight(toViz);
+}
+
+function getUserCorseChart(stats) {
+  console.log(stats);
+  const ctx = document.getElementById('user-chart');
+  const names = stats.map(x => x.firstname + ' ' + x.lastname);
+  const chartConfig = {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [
+        { label: 'corse eseguite', data: stats.map(x => x.count), backgroundColor: '#0E3D27FF' },
+        { label: 'corse guidate', data: stats.map(x => x.guidate), backgroundColor: '#0E3D27B3' },
+        { label: 'corse operate', data: stats.map(x => x.operate), backgroundColor: '#0E3D2763' },
+      ]  
+    }
+  }
+  new Chart(ctx, chartConfig);
 }

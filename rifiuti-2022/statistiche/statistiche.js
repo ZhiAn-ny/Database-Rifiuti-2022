@@ -1,6 +1,10 @@
 const MAX_DATA_VISUALIZED = 10;
 const chartContainer = document.getElementById('chart-container');
+const select = document.getElementById('rxt-viz-select');
 
+let lastLoadedStats = null;
+let chartEl = null;
+const stabilimenti = new Map();
 const chartConfig = {
   type: 'doughnut',
   options: {
@@ -14,21 +18,25 @@ const chartConfig = {
   data: {}
 }
 
-
-
-
-
 initChartContainer();
-
-
 
 function initChartContainer() {
   chartContainer.innerHTML = `<div class="spinner"></div>`;
   getRifiutiStorageStats().then((stats) => {
-    console.log(stats);
+    lastLoadedStats = stats;
+    initSelect(stats);
     chartContainer.innerHTML = `<canvas id="rifiuti-x-tipologie"></canvas>`;
     initChart(stats);
   });
+}
+
+function initSelect(stats) {
+  addOption(0, "Tutti gli stabilimenti", select);
+  stats.map(item => ({
+    cod: item.comune+'|'+item.zona+'|'+item.stabilimento_cod,
+    des: item.stabilimento_des
+  })).forEach(x => stabilimenti.set(x.cod, x.des));
+  stabilimenti.entries().forEach(e => addOption(e[0], e[1], select));
 }
 
 function initChart(stats) {
@@ -49,7 +57,15 @@ function initChart(stats) {
       data: [...cat.values()]
     }]  
   }
-  new Chart(ctx, chartConfig);
+  chartEl = new Chart(ctx, chartConfig);
 }
 
-
+function filterData() {
+  const value = select.value;
+  let toViz = lastLoadedStats
+  if (value != 0) {
+    toViz = lastLoadedStats.filter(item => item.comune+'|'+item.zona+'|'+item.stabilimento_cod === value);
+  }
+  chartEl.destroy();
+  initChart(toViz);
+}

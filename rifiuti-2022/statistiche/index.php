@@ -31,6 +31,8 @@ $nome = ''
         <section class="flex-row">
             <div>
                 <h2>Rifiuti trattati</h2>
+                <label for="rxt-viz-select">Filtra per stabiliemnto:</label>
+                <select id="rxt-viz-select" onchange="filterData()"></select>
             </div>
             <div id="chart-container">
                 <!-- <div class="spinner"></div> -->

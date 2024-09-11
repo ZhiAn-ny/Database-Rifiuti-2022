@@ -25,11 +25,13 @@ $nome = ''
             fetchLoginData();
         </script>
         <h1>Statistiche aziendali</h1>
+
         
         <section class="flex-row">
             <h2>Rifiuti trattati</h2>
-            <div class="chart-container">
-                <canvas id="rifiuti-x-tipologie"></canvas>
+            <div id="chart-container">
+                <!-- <div class="spinner"></div> -->
+                <!-- <canvas id="rifiuti-x-tipologie"></canvas> -->
             </div>
         </section>
     </body>

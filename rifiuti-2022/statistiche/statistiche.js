@@ -1,3 +1,5 @@
+const chartContainer = document.getElementById('chart-container');
+
 const chartConfig = {
   type: 'doughnut',
   options: {
@@ -13,20 +15,30 @@ const chartConfig = {
 
 
 
-initChart();
+
+
+initChartContainer();
 
 
 
-
+function initChartContainer() {
+  chartContainer.innerHTML = `<div class="spinner"></div>`;
+  setTimeout(() => {
+    chartContainer.innerHTML = `<canvas id="rifiuti-x-tipologie"></canvas>`;
+    initChart();
+  }, 3000);
+}
 
 function initChart() {
   const ctx = document.getElementById('rifiuti-x-tipologie');
   chartConfig.data = {
     labels: ['Organico', 'Carta', 'Vetro', 'Plastica', 'Indifferenziata'],
     datasets: [{
-      label: '# of Votes',
+      label: ' kg',
       data: [12, 19, 3, 5, 2, 3]
     }]  
   }
   new Chart(ctx, chartConfig);
 }
+
+

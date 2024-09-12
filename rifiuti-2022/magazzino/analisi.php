@@ -14,16 +14,26 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <script src="../assets/javascript/common.js"></script>
         <script src="../assets/javascript/utils.js"></script>
         <script src="../assets/javascript/auth.js"></script>
-        <script src="../assets/javascript/magazzino.js"></script>
+        <script src="../assets/javascript/analisi.js"></script>
+        <script src="../assets/javascript/carichi.js"></script>
         <link href="../assets/css/global.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/css/accettazione-smaltimento.css" rel="stylesheet" type="text/css"/>
-        <title>Smaltimento</title>
+        <title>Analisi</title>
     </head>
     <body>
         <script>
             fetchLoginData();
-            fetchMagazzinoRifiuti();
+            document.addEventListener('DOMContentLoaded', function() {
+                fetchRifiutoSelezionato();
+                fetchRifiutiSpecifici();
+                handleRifiutiSpecificiDropdown();
+            });
         </script>
-        <div id = "tableContainer"></div>
+        <table id ="rifiutoTable"></table>
+        <h1>Specifica i rifiuti contenuti</h1>
+        <table id ="rifiutiSpecificiTable"></table>
+        <select id="rifiutiSpecificiSelect"></select>
+        <button id="selezionaRifiuto" onclick="btnSelezionaRifiuto()">Dichiara rifiuto</button>
+        <button id="concludiAnalisi" onclick="btnConcludiAnalisi()">Concludi analisi</button>
     </body>
 </html>

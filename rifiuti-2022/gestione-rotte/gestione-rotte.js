@@ -36,16 +36,13 @@ function getEditDeleteBtns(route) {
     const div = document.createElement("div");
     let btn = document.createElement("button");
     btn.innerText = "Elimina";
-    btn.addEventListener("click", () => {
-        console.log("elimina rotta", route.codice);
-        deleteRoute(route.codice).then(() => loadRoutes());
-    })
+    btn.addEventListener("click",
+        () => deleteRoute(route.codice).then(() => loadRoutes())
+    )
     div.appendChild(btn);
     btn = document.createElement("button");
     btn.innerText = "Modifica";
-    btn.addEventListener("click", () => {
-        editRoute(route);
-    })
+    btn.addEventListener("click", () => editRoute(route));
     div.appendChild(btn);
     return div
 }
@@ -58,7 +55,7 @@ function editRoute(route) {
         p.innerText = "Stai modificando la rotta: " + route.descrizione;
         
         const list = getStopsList(stops);
-        const div = getNewStopDiv(route.codice);
+        const div = getNewStopDiv(route);
         list.appendChild(div);
         
         section.appendChild(p);
@@ -68,7 +65,7 @@ function editRoute(route) {
 
 function getStopsList(stops) {
     const list = document.createElement("ul");
-    stops.sort((t1, t2) => t2.precedente == t1.successiva ? -1 : 1)
+    stops.sort((t1, t2) => t1.codice == t2.precedente ? -1 : 1)
         .forEach(stop => {
             const p = document.createElement("li");
             p.innerText = stop.descrizione + ' - '
@@ -79,7 +76,7 @@ function getStopsList(stops) {
     return list;
 }
 
-function getNewStopDiv(routeId) {
+function getNewStopDiv(route) {
     const div = document.createElement("div");
     div.classList.add("s-btw");
     const input = document.createElement("input");
@@ -100,7 +97,9 @@ function getNewStopDiv(routeId) {
     const addBtn = document.createElement("button");
     addBtn.innerText = "Aggiungi fermata";
     addBtn.addEventListener("click", () => {
-        console.log("Aggiungi fermata", routeId, input.value, select.value);
+        console.log("Aggiungi fermata", route.codice, input.value, select.value);
+        addStopToRoute(route.codice, input.value, select.value)
+            .then(() => editRoute(route));
     })
     div.appendChild(select);
     div.appendChild(addBtn);

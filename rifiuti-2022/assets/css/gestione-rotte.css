@@ -24,3 +24,19 @@ li div {
     flex-direction: row;
     gap: 3px;
 }
+
+.s-btw {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#add-route-section {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+#add-route-section input {
+    width: 60%;
+}

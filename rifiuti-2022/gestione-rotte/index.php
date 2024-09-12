@@ -16,6 +16,7 @@ $nome = ''
         <script src="../assets/javascript/auth.js"></script>
         <script src="../assets/javascript/utils.js"></script>
         <script src="../assets/javascript/rotte.js"></script>
+        <script src="../assets/javascript/stabilimenti.js"></script>
         <script src="gestione-rotte.js" defer></script>
         <link href="../assets/css/global.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/css/gestione-rotte.css" rel="stylesheet" type="text/css"/>
@@ -27,7 +28,16 @@ $nome = ''
         </script>
 
         <h1>Gestione rotte</h1>
+        <section id="add-route-section">
+            <input id="new-route-name" type="text" placeholder="Nome rotta">
+            <button id="add-route-button" onclick="addRoute()">Aggiungi rotta</button>
+        </section>
         <ul id="routes-list"></ul>
+        <hr>
        
+        <section id="route-edit-section">
+
+        </section>
+
     </body>
 </html>

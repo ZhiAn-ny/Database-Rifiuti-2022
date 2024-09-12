@@ -21,8 +21,11 @@ function createTableHeader(table, columnNames) {
     table.insertBefore(thead, table.firstChild);
 }
 
-function addCell(row, item) {
+function addCell(row, item, hidden = false) {
     const cell = document.createElement('td');
+    if (hidden) {
+        cell.style.display = 'none';
+    }
     if (row.classList.length > 0) {
         row.classList.forEach(c => cell.classList.add(c));
     }
@@ -60,6 +63,28 @@ function addDropdownCell(row, defaultValue, options, id) {
     cell.appendChild(select);
     row.appendChild(cell);
     return select;
+}
+
+function updateColumnValue(table, targetValue, newValue) {
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+        const tds = row.querySelectorAll('td');
+        console.log(tds[0].innerText.trim())
+        if (tds.length > 0 && tds[0].innerText.trim() == targetValue) {
+            if (tds.length > tdIndex) {
+                tds[tdIndex].innerText = newValue;
+            }
+        }
+    });
+}
+
+function changeTdByContent(table, oldContent, newValue) {
+
+    const td = Array.from(table.querySelectorAll('td')).find(cell => cell.innerText.trim() == oldContent);
+    
+    if (td) {
+        td.innerText = newValue;
+    }
 }
 
 // DROPDOWNS

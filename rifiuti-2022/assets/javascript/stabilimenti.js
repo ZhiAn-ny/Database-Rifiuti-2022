@@ -7,6 +7,13 @@ async function fetchStabilimenti(tipologie = []) {
     else return data
 }
 
+function fetchAllStabilimenti() {
+    return getSupabase()
+        .from('Stabilimenti')
+        .select()
+        .then(res => dataOrNull(res));
+}
+
 async function fetchStabilimentoByID_Zona_Comune(codiceinput, zona, comune) {
     const { data, error } = await getSupabase()
         .rpc('get_stabilimento_info', { stabilimento_code: codiceinput, zona_input: zona, comune_input: comune })

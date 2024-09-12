@@ -1,0 +1,26 @@
+ul {
+    background-color: var(--primary-color-l);
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    border-radius: 10px;
+}
+li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 10px;
+    align-items: center;
+    background-color: var(--primary-color-l);
+    list-style: none;
+    border-radius: 5px;;
+}
+li:hover {
+    font-weight: bold;
+}
+li div {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+}

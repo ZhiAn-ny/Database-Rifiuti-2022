@@ -71,7 +71,6 @@ select {
     color: var(--primary-color);
 
 }
-
 select:disabled {
     background-color: var(--secondary-color-m);
     color: var(--primary-color-m);
@@ -81,15 +80,10 @@ td select {
     background-color: var(--secondary-color);
     border: none;
 }
-
-table,
-tbody,
-tr,
-td {
+table, tbody, tr, td {
     border: none !important;
     width: 100%;
 }
-
 thead {
     background-color: var(--primary-color) !important;
     color: white !important;
@@ -97,15 +91,12 @@ thead {
     border: none;
     border-radius: 5px;
 }
-
-th,
-td {
+th, td {
     border: none !important;
     border-radius: 5px !important;
     padding: 10px;
     text-align: left;
 }
-
 td {
     background-color: var(--primary-color-l);
 }
@@ -128,7 +119,6 @@ hr {
     margin: 10px;
     z-index: 1000;
 }
-
 .toast {
     padding: 10px;
     width: 250px;
@@ -141,7 +131,6 @@ hr {
     font-weight: bold;
     /* border-left: 5px solid var(--primary-color); */
 }
-
 .toast-error {
     background: rgb(146 21 21 / 71%);
     color: var(--secondary-color);
@@ -151,14 +140,12 @@ hr {
     width: 7px;
     /* width of the entire scrollbar */
 }
-
 ::-webkit-scrollbar-track {
     background: var(--primary-color-l);
     /* color of the tracking area */
     border-radius: 3px;
     border: 1px solid var(--primary-color-l);
 }
-
 ::-webkit-scrollbar-thumb {
     background-color: var(--primary-color-m);
     /* color of the scroll thumb */
@@ -175,14 +162,12 @@ hr {
     max-width: 45px !important;
     height: 25px;
 }
-
 /* Hide default HTML checkbox */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
-
 /* The slider */
 .slider {
     position: absolute;
@@ -196,7 +181,6 @@ hr {
     transition: .4s;
     max-width: inherit;
 }
-
 .slider:before {
     position: absolute;
     content: "";
@@ -208,26 +192,21 @@ hr {
     -webkit-transition: .4s;
     transition: .4s;
 }
-
 input:checked+.slider {
     background-color: var(--primary-color);
 }
-
 input:focus+.slider {
     box-shadow: 0 0 1px var(--primary-color);
 }
-
 input:checked+.slider:before {
     -webkit-transform: translateX(18px);
     -ms-transform: translateX(18px);
     transform: translateX(18px);
 }
-
 /* Rounded sliders */
 .slider.round {
     border-radius: 34px;
 }
-
 .slider.round:before {
     border-radius: 50%;
 }
@@ -246,7 +225,6 @@ input:checked+.slider:before {
     height: 20px;
     animation: spin 2s linear infinite;
 }
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

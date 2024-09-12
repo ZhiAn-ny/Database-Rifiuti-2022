@@ -1,3 +1,5 @@
+const assignUserSection = document.getElementById('assign-user-section');
+
 const corsaPK = getExtraData();
 console.log(corsaPK.inizio, corsaPK.camion)
 corsaPK.inizio = new Date(corsaPK.inizio);
@@ -16,16 +18,16 @@ loadAssignedUsers().then(() => reloadSelectOptions());
 
 function loadAssignedUsers() {
     return getUtentiCorsa(corsaPK.inizio, corsaPK.camion)
-    .then(r => {
+    .then(users => {
         usersContainer.innerHTML = '';
-        console.log(r)
-        if (r == null) {
+        console.log(users)
+        if (users == null || users.length == 0) {
             usersContainer.innerHTML = `<p>Nessun utente assegnato a questa corsa</p>`;
         } else {
             const h2 = document.createElement('h2');
             h2.innerText = `Utenti assegnati a questa corsa:`;
             usersContainer.appendChild(h2);
-            r.forEach(u => {
+            users.forEach(u => {
                 const row = document.createElement('p');
                 row.classList.add('user-row');
                 row.innerText = `${u.nome} ${u.cognome} (${u.cf})`;
@@ -36,6 +38,7 @@ function loadAssignedUsers() {
                 assignedUsers.push(u.cf);
             })
         }
+        assignUserSection.style.display = users.length >= 2 ? 'none' : 'block';
     });
 }
 

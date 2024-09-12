@@ -33,7 +33,7 @@ $nome = ''
         <h1 id="page-title"></h1>
         <section id="users-container"></section>
         <hr>
-        <section>
+        <section id="assign-user-section">
             <h2>Assegna un utente</h2>
             <form id="assignUserForm">
                 <select id="user-select"></select>

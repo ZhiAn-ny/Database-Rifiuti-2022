@@ -14,6 +14,7 @@ $nome = ''
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <script src="assets/javascript/common.js"></script>
         <script src="assets/javascript/auth.js"></script>
+        <script src="assets/javascript/utenti.js"></script>
         <script src="dashboard.js" defer></script>
         <link href="assets/css/global.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/dashboard.css" rel="stylesheet" type="text/css"/>
@@ -26,7 +27,8 @@ $nome = ''
 
         <section>
             <h1 id="userData" class=user-name></h1>
-            <div id="userEmail"></div>
+            <p id="userEmail"></p>
+            <p id="userType"></p>
         </section>
         <section>
             <button onclick="redirectToPage('turni.php', getLoginInfo())">Il mio calendario lavorativo</button>

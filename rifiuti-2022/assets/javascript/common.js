@@ -26,3 +26,24 @@ async function redirectPreviousPage(data = "", extra_data = "") {
     sessionStorage.setItem('extraData', JSON.stringify(extra_data));
     window.history.back();
 }
+
+/** @requires toastr */
+function toastSuccess(text) {
+    toastr.success(text);
+}
+/** @requires toastr */
+function toastError(text) {
+    toastr.error(text);
+}
+
+/** If an error occurred, toast the error's details and return null.
+ * Else return the data.
+ */
+function dataOrNull(res) {
+    if (res.error) {
+        toastError(res.error.details);
+        return null;
+    } else {
+        return res.data;
+    }
+}

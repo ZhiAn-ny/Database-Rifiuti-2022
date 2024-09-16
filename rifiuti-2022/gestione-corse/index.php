@@ -58,6 +58,8 @@ $nome = ''
                 <div>
                     <label for="camionDdl">Camion</label>
                     <select name="camionDdl" id="camionDdl" required></select>
+                    <label for="routesDdl">Rotta</label>
+                    <select name="routesDdl" id="routesDdl" required></select>
                 </div>
             </form>
             <button onclick="addCorsa()">Aggiungi</button>

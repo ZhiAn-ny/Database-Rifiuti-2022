@@ -26,13 +26,15 @@ getAllCamion().then((camion) => {
         select.appendChild(option);
     })
 })
+loadRotte();
 
 function addCorsa() {
     const date = document.getElementById('data').value;
     const time = document.getElementById('ora').value;
     const dateTime = new Date(date + "T" + time + ":00");
     const camion = document.getElementById('camionDdl').value;
-    addNewCorsa(dateTime, camion)
+    const route = document.getElementById('routesDdl').value;
+    addNewCorsa(dateTime, camion, route)
         .then(ok => {
             if (ok) reloadCorseList();
         })
@@ -190,4 +192,13 @@ function getRotteSelect(dateTime, tag) {
             })
         }
     });
+}
+
+function loadRotte() {
+    const routesDdl = document.getElementById('routesDdl');
+    addDefaultOption("Scegli rotta da assegnare", routesDdl);
+    getAllRoutes()
+    .then(routes => routes.forEach((route) => 
+        addOption(route.codice, route.descrizione, routesDdl)
+    ))
 }

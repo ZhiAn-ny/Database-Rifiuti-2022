@@ -52,14 +52,18 @@ function getUtentiCorsa(dataOraInizio, camion) {
         ));
 }
 
-function addNewCorsa(dataOraInizio, camion) {
+function addNewCorsa(dataOraInizio, camion, route) {
+    if (camion == null || route == null) {
+        toastError("Camion e route non possono essere nulli");
+        return;
+    }
     return getSupabase()
         .from('Corse')
         .insert([
             {
                 inizio: dataOraInizio,
                 camion: camion,
-                rotta: null,
+                rotta: route,
                 carico: null
             }
         ])

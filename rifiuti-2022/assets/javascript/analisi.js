@@ -61,7 +61,6 @@ async function btnSelezionaRifiuto() {
     const extraData = getExtraData();
     const lotto_id = extraData.rifiuto.lotto_appartenenza;
     if (rifiutoSelezionato != "" && rifiutoSelezionato != undefined) {
-        // await aggiungiRifiutoLotto(rifiutoSelezionato, lotto)
         let isUpdating = updateColumnValue(resultsTable, rifiutoSelezionato.rifiuto, 4, rifiutoSelezionato.peso, updateRifiutiTableRowValue);
         if(!isUpdating) {
             const newRow = document.createElement('tr');
@@ -87,7 +86,27 @@ function updateRifiutiTableRowValue(tds, newValue) {
     tds[3].innerText = parseInt(tds[3].innerText) + 1;
 }
 
-
+async function btnConcludiAnalisi() {
+    const resultsTable = document.getElementById('rifiutiSpecificiTable');
+    const rows = resultsTable.querySelectorAll('tr');
+    const extraData = getExtraData();
+    const lotto_id = extraData.rifiuto.lotto_appartenenza;
+    let success = false;
+    rows.forEach(async (row) => {
+        let tds = row.querySelectorAll('td');
+        if (tds.length > 0) {
+            await aggiungiRifiutiLotto(parseInt(tds[0].innerText), lotto_id, parseInt(tds[3].innerText));
+            success = true;
+            console.log("found!")
+        }
+    })
+    console.log(success);
+    if(success) {
+        await rimuoviRifiutoLotto(extraData.rifiuto.rifiuto, lotto_id);
+        const loginData = getLoginInfo();
+        redirectPreviousPage(loginData)
+    }
+}
 
 async function getRifiutoByID(rifiuto_id) {
     const { data, error } = await getSupabase()

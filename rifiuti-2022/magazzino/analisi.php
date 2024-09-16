@@ -29,6 +29,7 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
                 handleRifiutiSpecificiDropdown();
             });
         </script>
+        <h1>Rifiuto generico in analisi:</h1>
         <table id ="rifiutoTable"></table>
         <h1>Specifica i rifiuti contenuti</h1>
         <select id="rifiutiSpecificiSelect"></select>

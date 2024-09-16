@@ -13,6 +13,7 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
         <script src="assets/javascript/common.js"></script>
         <script src="assets/javascript/auth.js"></script>
+        <script src="assets/javascript/utils.js"></script>
         <link href="assets/css/global.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/login.css" rel="stylesheet" type="text/css"/>
         <title>Accedi al tuo account</title>
@@ -26,7 +27,7 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         </div>
         <div class="form-control">
             <label for="pass">Password:</label>
-            <input type="text" id="pass" name="pass"><br><br>
+            <input type="password" id="pass" name="pass"><br><br>
         </div>
     </div>
     <button onclick="loginSito()">Login</button>

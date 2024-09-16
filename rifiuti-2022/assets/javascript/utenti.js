@@ -16,3 +16,11 @@ function getStatsUtentiCorse() {
         .rpc('get_stats_utenti_corse', { })
         .then(res => dataOrNull(res));
 }
+
+function getTipologiaUtente(typeId) {
+    return getSupabase()
+        .from("Tipologie_Utenti")
+        .select()
+        .eq('codice', typeId)
+        .then(res => dataOrNull(res));
+}

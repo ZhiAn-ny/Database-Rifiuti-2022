@@ -65,26 +65,21 @@ function addDropdownCell(row, defaultValue, options, id) {
     return select;
 }
 
-function updateColumnValue(table, targetValue, newValue) {
-    const rows = table.querySelectorAll('tbody tr');
+function updateColumnValue(table, id, columnIndex, newValue, operation) {
+    const rows = table.querySelectorAll('tr');
+    let result = false;
     rows.forEach(row => {
         const tds = row.querySelectorAll('td');
-        console.log(tds[0].innerText.trim())
-        if (tds.length > 0 && tds[0].innerText.trim() == targetValue) {
-            if (tds.length > tdIndex) {
-                tds[tdIndex].innerText = newValue;
+        if (tds.length > 0 && tds[0].innerText == id) {
+            if (operation != undefined) {
+                operation(tds, newValue);
+            } else {
+                tds[columnIndex].innerText = newValue;
             }
+            result = true;
         }
     });
-}
-
-function changeTdByContent(table, oldContent, newValue) {
-
-    const td = Array.from(table.querySelectorAll('td')).find(cell => cell.innerText.trim() == oldContent);
-    
-    if (td) {
-        td.innerText = newValue;
-    }
+    return result;
 }
 
 // DROPDOWNS

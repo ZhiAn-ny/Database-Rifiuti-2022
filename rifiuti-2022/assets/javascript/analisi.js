@@ -60,12 +60,10 @@ async function btnSelezionaRifiuto() {
     const rifiutoSelezionato = await getRifiutoByID(rifiuto_id);
     const extraData = getExtraData();
     const lotto_id = extraData.rifiuto.lotto_appartenenza;
-    if (rifiutoSelezionato != "") {
+    if (rifiutoSelezionato != "" && rifiutoSelezionato != undefined) {
         // await aggiungiRifiutoLotto(rifiutoSelezionato, lotto)
-        let rigaRifiutoPresente = updateColumnValue(resultsTable, rifiutoSelezionato.rifiuto, 1000);
-        if(rigaRifiutoPresente) {
-            
-        } else {
+        let isUpdating = updateColumnValue(resultsTable, rifiutoSelezionato.rifiuto, 4, rifiutoSelezionato.peso, updateRifiutiTableRowValue);
+        if(!isUpdating) {
             const newRow = document.createElement('tr');
             
             addCell(newRow, rifiutoSelezionato.rifiuto, true);
@@ -82,6 +80,14 @@ async function btnSelezionaRifiuto() {
 
     }
 }
+
+function updateRifiutiTableRowValue(tds, newValue) {
+    let somma = parseFloat(tds[4].innerText.replace(/[^\d.-]/g, '')) + parseFloat(newValue);
+    tds[4].innerText = somma.toFixed(2) + ' Kg'
+    tds[3].innerText = parseInt(tds[3].innerText) + 1;
+}
+
+
 
 async function getRifiutoByID(rifiuto_id) {
     const { data, error } = await getSupabase()

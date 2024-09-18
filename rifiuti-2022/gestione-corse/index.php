@@ -19,6 +19,7 @@ $nome = ''
         <script src="../assets/javascript/rotte.js"></script>
         <script src="../assets/javascript/camion.js"></script>
         <script src="../assets/javascript/carichi.js"></script>
+        <script src="../assets/javascript/magazzino.js"></script>
         <script src="gestione-corse.js" defer></script>
         <link href="../assets/css/global.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/css/gestione-corse.css" rel="stylesheet" type="text/css"/>

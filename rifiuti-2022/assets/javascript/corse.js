@@ -79,6 +79,12 @@ function setCaricoCorsa(dataOraInizio, camion, carico) {
         .eq('inizio', dataOraInizio.toISOString())
         .eq('camion', camion)
         .select()
+        .then(res => {
+            if (!res.error) {
+                return setDataScarico(carico);
+            }
+            return res;
+        })
         .then(res => dataOrNull(res))
 }
 

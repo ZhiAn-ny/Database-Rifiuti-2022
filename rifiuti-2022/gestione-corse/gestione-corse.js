@@ -118,10 +118,10 @@ function getDateTag(event) {
 function getCarichiSelect(dateTime, tag) {
     toggleDialog('caricoPopup').then(visible => {
         if (visible) {
-            getAllCarichi().then(carichi => {
+            getCarichiInMagazzino().then(carichi => {
                 const sel = getPopupSelect("carichiDdl", "Scegli carico da assegnare");
                 carichi.forEach((carico) => {
-                    const text = carico.lotto + " (" + carico.peso + " kg)";
+                    const text = carico.lotto + " (" + carico.Carichi.peso + " kg)";
                     addOption(carico.lotto, text, sel)
                 });
                 carichiPopup.appendChild(sel);

@@ -56,3 +56,12 @@ async function fetchRifiutiByMagazzino(stabilimento_id, zona_id, codice_id) {
     if (error) console.error(error)
     else return data
 }
+
+function setDataScarico(lotto) {
+    return getSupabase()
+    .from('Magazzino')
+    .update({ data_scarico: new Date().toISOString() })
+    .is('data_scarico', null)
+    .eq('lotto', lotto)
+    .select()
+}

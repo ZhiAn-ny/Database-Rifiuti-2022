@@ -14,6 +14,16 @@ async function getAllCarichi() {
     else return data
 }
 
+function getCarichiInMagazzino() {
+    return getSupabase()
+    .from('Magazzino')
+    .select(`lotto, stabilimento, zona, comune,
+        data_carico, data_scarico,
+        Carichi (lotto, peso, stato)
+    `).is('data_scarico', null)
+    .then(res => dataOrNull(res));
+}
+
 async function getStatoCarico(inizio_input, targa_input) {
     const { data, error } = await getSupabase()
         .rpc('get_stato_carico', { inizio_input: inizio_input, targa_input: targa_input })

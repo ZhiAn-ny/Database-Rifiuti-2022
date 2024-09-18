@@ -77,9 +77,9 @@ async function fetchRifiutiLotto(include_removeBtn) {
     } catch (error) { }
 }
 
-async function aggiungiRifiutoLotto(rifiuto, lotto) {
+async function aggiungiRifiutiLotto(rifiuto, lotto, qta = 1) {
     const { data, error } = await getSupabase()
-        .rpc('add_rifiuto_lotto', { rifiuto_input: rifiuto, lotto_input: lotto })
+        .rpc('add_rifiuto_lotto_update_weight', { rifiuto_input: rifiuto, lotto_input: lotto, qta_input: qta})
     if (error) console.error(error);
 }
 

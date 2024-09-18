@@ -5,7 +5,7 @@ async function btnAggiungiRifiuto() {
     const rifiuto = document.getElementById('rifiutiSelect').value;
     const lotto = getExtraData().lotto.carico_id;
     if (rifiuto != "") {
-        await aggiungiRifiutoLotto(rifiuto, lotto)
+        await aggiungiRifiutiLotto(rifiuto, lotto)
         refreshTables([
             { table: document.getElementById('rifiutiLottoTable'), function: fetchRifiutiLotto(true) },
         ]);

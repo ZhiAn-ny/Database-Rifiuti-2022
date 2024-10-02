@@ -1,7 +1,12 @@
-body {
+.user-page-container {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    flex-wrap: nowrap;
+}
+
+header {
+    width: 100% !important;
 }
 
 section {
@@ -9,6 +14,7 @@ section {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    flex-grow: 1;
 }
 
 .user-name {

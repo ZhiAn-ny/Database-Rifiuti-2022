@@ -84,12 +84,9 @@ async function aggiungiRifiutiLotto(rifiuto, lotto, qta = 1) {
 }
 
 async function rimuoviRifiutoLotto(rifiuto, lotto) {
-    const { data, error } = await getSupabase()
+    return getSupabase()
         .rpc('delete_rifiuto_lotto', { rifiuto_input: rifiuto, lotto_input: lotto })
-    if (error) console.error(error);
-    refreshTables([
-        { table: document.getElementById('rifiutiLottoTable'), function: fetchRifiutiLotto(true) },
-    ]);
+        .then(res => dataOrNull(res));
 }
 
 async function consegnaLotto(lotto, stabilimento, zona, comune, data_carico = new Date().toISOString()) {

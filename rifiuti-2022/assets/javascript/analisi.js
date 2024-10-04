@@ -87,25 +87,31 @@ function updateRifiutiTableRowValue(tds, newValue) {
 }
 
 async function btnConcludiAnalisi() {
-    const resultsTable = document.getElementById('rifiutiSpecificiTable');
-    const rows = resultsTable.querySelectorAll('tr');
     const extraData = getExtraData();
     const lotto_id = extraData.rifiuto.lotto_appartenenza;
-    let success = false;
-    rows.forEach(async (row) => {
-        let tds = row.querySelectorAll('td');
-        if (tds.length > 0) {
-            await aggiungiRifiutiLotto(parseInt(tds[0].innerText), lotto_id, parseInt(tds[3].innerText));
-            success = true;
-            console.log("found!")
-        }
+    const resultsTable = document.getElementById('rifiutiSpecificiTable');
+    const trash = new Map();
+    const rows = resultsTable.querySelectorAll('tr')
+        .forEach((row) => {
+            let tds = row.querySelectorAll('td');
+            if (tds.length > 0) {
+                const trashCod = parseInt(tds[0].innerText);
+                const qta = parseInt(tds[3].innerText);
+                trash.has(trashCod)
+                    ? trash.set(trashCod, trash.get(trashCod) + qta)
+                    : trash.set(trashCod, qta)
+            }
+        })
+    const trashArr = Array.from(trash.entries());
+    Promise.all(
+        trashArr.map(([trashCod, qta]) => aggiungiRifiutiLotto(trashCod, lotto_id, qta))
+    ).then(res => {
+        toastSuccess('Operazione conclusa con successo!')
+        rimuoviRifiutoLotto(extraData.rifiuto.rifiuto, lotto_id).then(res => {
+            const loginData = getLoginInfo();
+            redirectPreviousPage(loginData)
+        })
     })
-    console.log(success);
-    if(success) {
-        await rimuoviRifiutoLotto(extraData.rifiuto.rifiuto, lotto_id);
-        const loginData = getLoginInfo();
-        redirectPreviousPage(loginData)
-    }
 }
 
 async function getRifiutoByID(rifiuto_id) {

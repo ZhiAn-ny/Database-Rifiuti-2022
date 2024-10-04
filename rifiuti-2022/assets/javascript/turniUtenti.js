@@ -1,29 +1,36 @@
 async function fetchTurniTable() {
     const user = getLoginInfo();
-    const stabilimenti = await getStabilimentiPerUtente(user);
+    const stabilimenti = await getTurniUtente(user);
+    const sMap = new Map();
+    stabilimenti.map(s => s.stabilimento+'|'+s.zona+'|'+s.comune)
+        .toSorted()
+        .forEach(s => sMap.set(s, []));
+    const parsed = stabilimenti.map(s => ({cod: s.stabilimento+'|'+s.zona+'|'+s.comune, data: s}))
+    sMap.forEach((v, k) => v.push(...parsed.filter(s => s.cod === k).map(s => s.data)));
 
-    if (stabilimenti) {
+    if (sMap.size > 0) {
         let resultsTable = document.getElementById('turniTable');
         let previous = "";
-
-        for (const item of stabilimenti) {
-            const stabilimento = await fetchStabilimentoByID_Zona_Comune(item.stabilimento, item.zona, item.comune);
-            const newRow = document.createElement('tr');
-
-            if (previous !== item.stabilimento) {
-                const titleRow = document.createElement('tr');
-                titleRow.classList.add('titleRow');
-                addCell(
-                    titleRow,
-                    stabilimento.stabilimento + " - " + stabilimento.zona + ", " + stabilimento.comune
-                );
-                resultsTable.appendChild(titleRow);
-            }
-
-            previous = item.stabilimento;
-            addCell(newRow, "Da " + formatDate(item.inizio) + " a " + formatDate(item.fine));
-            resultsTable.appendChild(newRow);
-        }
+        sMap.forEach((turni, k) => {
+            turni = turni.toSorted((a,b) => new Date(a.inizio) - new Date(b.inizio));
+            fetchStabilimentoByID_Zona_Comune(turni[0].stabilimento, turni[0].zona, turni[0].comune).then(stabilimento => {
+                turni.forEach(item => {
+                    const newRow = document.createElement('tr');
+                    if (previous !== item.stabilimento) {
+                        const titleRow = document.createElement('tr');
+                        titleRow.classList.add('titleRow');
+                        addCell(
+                            titleRow,
+                            stabilimento.stabilimento + " - " + stabilimento.zona + ", " + stabilimento.comune
+                        );
+                        resultsTable.appendChild(titleRow);
+                    }
+                    previous = item.stabilimento;
+                    addCell(newRow, "Da " + formatDate(item.inizio) + " a " + formatDate(item.fine));
+                    resultsTable.appendChild(newRow);
+                })
+            })
+        })
     }
 }
 
@@ -40,4 +47,12 @@ async function getStabilimentiPerUtente(user) {
         ))
     );
     return filteredData;
+}
+
+function getTurniUtente(user) {
+    return getSupabase()
+    .from('Turni')
+    .select()
+    .eq('utente', user.cf)
+    .then(res => dataOrNull(res))
 }

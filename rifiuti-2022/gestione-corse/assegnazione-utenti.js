@@ -1,4 +1,5 @@
 const assignUserSection = document.getElementById('assign-user-section');
+const MAX_UTENTI_PER_CORSA = 5;
 
 const corsaPK = getExtraData();
 console.log(corsaPK.inizio, corsaPK.camion)
@@ -38,7 +39,7 @@ function loadAssignedUsers() {
                 assignedUsers.push(u.cf);
             })
         }
-        assignUserSection.style.display = users.length >= 2 ? 'none' : 'block';
+        assignUserSection.style.display = users.length >= MAX_UTENTI_PER_CORSA ? 'none' : 'block';
     });
 }
 

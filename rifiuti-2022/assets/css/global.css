@@ -231,6 +231,9 @@ input:checked+.slider:before {
 .gap-10 {
     gap: 10px ;
 }
+.margin-10 {
+    margin: 10px;
+}
 
 .spinner {
     border: 5px solid var(--primary-color-l);

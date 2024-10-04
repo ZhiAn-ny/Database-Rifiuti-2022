@@ -27,6 +27,9 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
             fetchEsecuzione();
             fetchEsecuzione_Proprie();
         </script>
+        <button class="text-btn full-width margin-10"
+            onclick="redirectToPageGlobal('dashboard.php', getLoginInfo())" 
+        ><< Torna alla dashboard</button>
 
         <h1>Corse da accettare</h1>
         <table>

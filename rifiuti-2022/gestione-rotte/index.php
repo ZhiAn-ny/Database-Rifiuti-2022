@@ -27,6 +27,10 @@ $nome = ''
             fetchLoginData();
         </script>
 
+        <button class="text-btn full-width"
+            onclick="redirectToPageGlobal('dashboard.php', getLoginInfo())" 
+        ><< Torna alla dashboard</button>
+
         <h1>Gestione rotte</h1>
         <section id="add-route-section">
             <input id="new-route-name" type="text" placeholder="Nome rotta">

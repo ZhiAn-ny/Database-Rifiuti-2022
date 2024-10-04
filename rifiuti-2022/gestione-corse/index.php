@@ -32,21 +32,12 @@ $nome = ''
         <!-- i888eddf8 -->
         <div id="caricoPopup"></div>
         <div id="routePopup"></div>
+        
+        <button class="text-btn full-width"
+            onclick="redirectToPageGlobal('dashboard.php', getLoginInfo())" 
+        ><< Torna alla dashboard</button>
 
         <h1>Gestione corse</h1>
-        <section>
-            <h2>Lista corse</h2>
-            <div id="corse-list-container">
-                <div class="corse-header">
-                    <span>Data</span>
-                    <span>Camion</span>
-                    <span>Lotto</span>
-                    <span>Rotta</span>
-                    <span></span>
-                </div>
-                <div id="corse-list"></div>
-            </div>
-        </section>
         <section>
             <h2>Aggiungi una nuova corsa</h2>
             <form id="addCorsaForm">
@@ -64,6 +55,19 @@ $nome = ''
                 </div>
             </form>
             <button onclick="addCorsa()">Aggiungi</button>
+        </section>
+        <section>
+            <h2>Lista corse</h2>
+            <div id="corse-list-container">
+                <div class="corse-header">
+                    <span>Data</span>
+                    <span>Camion</span>
+                    <span>Lotto</span>
+                    <span>Rotta</span>
+                    <span></span>
+                </div>
+                <div id="corse-list"></div>
+            </div>
         </section>
 
     </body>

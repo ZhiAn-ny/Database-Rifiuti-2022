@@ -26,8 +26,11 @@ $nome = ''
         <script>
             fetchLoginData();
         </script>
-        <h1>Statistiche aziendali</h1>
+        <button class="text-btn full-width"
+            onclick="redirectToPageGlobal('dashboard.php', getLoginInfo())" 
+        ><< Torna alla dashboard</button>
 
+        <h1>Statistiche aziendali</h1>
         
         <section class="flex-row">
             <div>

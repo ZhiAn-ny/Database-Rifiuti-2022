@@ -47,7 +47,7 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         </section>
         <section class="flex-row">
             <button id="aggiungiRifiuto" onclick="btnAggiungiRifiuto()">Aggiungi rifiuto</button>
-            <select id="rifiutiSelect"></select>
+            <select id="rifiutiSelect" class="full-width"></select>
         </section>
     </body>
 </html>

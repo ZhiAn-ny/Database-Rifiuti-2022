@@ -76,7 +76,7 @@ async function btnSelezionaRifiuto() {
     
             resultsTable.appendChild(newRow);
         }
-
+        toastSuccess("Rifiuto aggiunto correttamente!")
     }
 }
 

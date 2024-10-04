@@ -139,6 +139,9 @@ hr {
     background: rgb(146 21 21 / 71%);
     color: var(--secondary-color);
 }
+.toast-success {
+    border-right: green 10px solid;
+}
 
 ::-webkit-scrollbar {
     width: 7px;

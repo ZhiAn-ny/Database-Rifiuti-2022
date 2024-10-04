@@ -21,11 +21,12 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <link href="../assets/css/turni.css" rel="stylesheet" type="text/css"/>
         <title>Turni lavorativi</title>
     </head>
-    <body>
+    <body class="flex-col gap-10">
         <script>
             fetchLoginData();
         </script>
         <h1>I miei turni</h1>
+        <button onclick="redirectToPageGlobal('dashboard.php', getLoginInfo())" class="text-btn full-width"><< Torna alla dashboard</button>
         <form>
             <label for="da">Dal</label>
             <input #da type="date" id="da" name="da" required>

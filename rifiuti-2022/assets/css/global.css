@@ -220,6 +220,17 @@ input:checked+.slider:before {
     flex-direction: row;
     justify-content: space-around;
 }
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.full-width {
+    width: 100%;
+}
+.gap-10 {
+    gap: 10px ;
+}
 
 .spinner {
     border: 5px solid var(--primary-color-l);

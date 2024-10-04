@@ -50,7 +50,7 @@ $nome = ''
         <section>
             <h2>Statistiche utenti</h2>
             <div id="user-chart-container">
-                <canvas id="user-chart"></canvas>
+                <canvas id="user-chart" style="max-height: 500px"></canvas>
             </div>
         </section>
     </body>

@@ -1,4 +1,4 @@
-async function fetchTurniTable() {
+async function fetchTurniTable(da, a) {
     const user = getLoginInfo();
     const stabilimenti = await getTurniUtente(user);
     const sMap = new Map();
@@ -10,9 +10,11 @@ async function fetchTurniTable() {
 
     if (sMap.size > 0) {
         let resultsTable = document.getElementById('turniTable');
+        resultsTable.innerHTML = "";
         let previous = "";
         sMap.forEach((turni, k) => {
-            turni = turni.toSorted((a,b) => new Date(a.inizio) - new Date(b.inizio));
+            turni = turni.toSorted((a,b) => new Date(a.inizio) - new Date(b.inizio))
+                .filter(t => new Date(t.inizio) >= da && new Date(t.fine) <= a);
             fetchStabilimentoByID_Zona_Comune(turni[0].stabilimento, turni[0].zona, turni[0].comune).then(stabilimento => {
                 turni.forEach(item => {
                     const newRow = document.createElement('tr');

@@ -29,7 +29,7 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <button class="text-btn full-width"
             onclick="redirectToPageGlobal('dashboard.php', getLoginInfo())" 
         ><< Torna alla dashboard</button>
-        
+
         <div id = "tableContainer"></div>
     </body>
 </html>

@@ -21,6 +21,7 @@ function initChartContainer() {
     chartContainer.innerHTML = `<canvas id="rifiuti-x-tipologie"></canvas>`;
     initChart(stats);
     showTotalWeight(stats);
+    showProcessedWeight(stats);
   });
 }
 
@@ -71,6 +72,12 @@ function showTotalWeight(stats) {
   pesoTotParag.innerHTML = `Il peso totale dei rifiuti è di ${w} kg`;
 }
 
+function showProcessedWeight(stats) {
+  const pesoTotParag = document.getElementById('peso-smaltiti');
+  const w = stats.filter(r => r.smaltito).reduce((acc, item) => acc + item.peso_totale, 0).toFixed(2);
+  pesoTotParag.innerHTML = `Il peso totale dei rifiuti smaltiti è di ${w} kg`;
+}
+
 function filterData() {
   const value = select.value;
   let toViz = lastLoadedStats
@@ -80,6 +87,7 @@ function filterData() {
   chartEl.destroy();
   initChart(toViz);
   showTotalWeight(toViz);
+  showProcessedWeight(toViz);
 }
 
 function getUserCorseChart(stats) {

@@ -38,7 +38,9 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
                 handleRifiutiDropdown();
             });
         </script>
-
+        <button class="text-btn full-width"
+            onclick="redirectToPageGlobal('dashboard.php', getLoginInfo())" 
+        ><< Torna alla dashboard</button>
         <h1 id="pageTitle"></h1>
         <section>
             <table>

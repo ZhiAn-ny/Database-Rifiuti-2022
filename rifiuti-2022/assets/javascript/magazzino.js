@@ -14,12 +14,11 @@ async function fetchMagazzinoRifiuti() {
                 table.className = 'magazzinoTable';
                 table.classList.add('greyed-out')
                 
-                createTableHeader(table, ["Data raccolta", "Data consegna", "Tipo rifiuto", "Descrizione", "Quantità", "Peso (Kg)", "Ingombrante", "Pericoloso", "Riciclabile"]);
+                createTableHeader(table, ["Data consegna", "Tipo rifiuto", "Descrizione", "Quantità", "Peso (Kg)", "Ingombrante", "Pericoloso", "Riciclabile"]);
 
                 for (const rifiuto of rifiuti) {
                     const newRow = document.createElement('tr');
                     addCell(newRow, formatDate(rifiuto.data_carico));
-                    addCell(newRow, formatDate(rifiuto.data_scarico));
                     addCell(newRow, rifiuto.tipo_rifiuto_des);
                     addCell(newRow, rifiuto.rifiuto);
                     addCell(newRow, rifiuto.quantita);

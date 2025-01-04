@@ -104,7 +104,7 @@ async function btnConsegnaLotto() {
         result = await consegnaLotto(extra.lotto.carico_id, stabilimento[0], stabilimento[1], stabilimento[2]);
         console.log(result);
         if (result) {
-            //setStatoCarico(StatiCarico.CONSEGNATO, )
+            setStatoCarico(StatiCarico.CONSEGNATO, null, null)
             const loginData = getLoginInfo();
             redirectPreviousPage(loginData)
         }

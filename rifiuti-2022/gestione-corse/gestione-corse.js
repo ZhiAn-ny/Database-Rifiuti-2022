@@ -109,8 +109,8 @@ function getDateTag(event) {
     let dateStr = event.target.parentElement.children[0].innerText;
     let [date, time] = dateStr.split(', ');
     let [day, month, year] = date.split('/');
-    date = month + "/" + day + "/" + year;
-    const dateTime = new Date(date + "Z" + time + "+2");
+    date = year + "-" + month + "-" + day;
+    const dateTime = new Date(date + "T" + time);
     const tag = event.target.parentElement.children[1].innerText;
     return {dateTime, tag};
 }

@@ -36,10 +36,11 @@ $nome = ''
             <div>
                 <h2>Statistiche rifiuti</h2>
                 <h3>Rifiuti trattati</h3>
-                <label for="rxt-viz-select">Filtra per stabiliemnto:</label>
+                <label for="rxt-viz-select">Filtra per stabilimento:</label>
                 <select id="rxt-viz-select" onchange="filterData()"></select>
 
-                <p id="peso-totale">Peso dei totale dei rifiuti trattati:</p>
+                <p id="peso-totale">Peso totale dei rifiuti trattati:</p>
+                <p id="peso-smaltiti">Peso totale dei rifiuti smaltiti:</p>
             </div>
             <div id="chart-container">
                 <!-- <div class="spinner"></div> -->

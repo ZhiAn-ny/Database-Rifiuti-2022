@@ -23,3 +23,25 @@
 td {
     white-space: nowrap;
 }
+
+.form-input-text {
+    color: var(--secondary-color);
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+.form-input-text input {
+    width: 250px;
+    background-color: var(--secondary-color-m);
+    padding: 5px 10px;
+}
+
+.form-btn {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+.form-select {
+    background-color: var(--secondary-color-m);
+    width: 290px;
+}

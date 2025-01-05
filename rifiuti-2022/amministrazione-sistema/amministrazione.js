@@ -5,7 +5,7 @@ const newUserPopup = document.getElementById('newUserPopup');
 const newMachinePopup = document.getElementById('newMachinePopup');
 createDialogFrom(
     'newUserPopup',
-    'padding: 50px; width: 40%; gap: 30px; left: 25%;'
+    'padding: 50px; width: 40%; height: 70%; gap: 30px; left: 25%;'
 );
 createDialogFrom(
     'newMachinePopup',
@@ -21,11 +21,18 @@ getAllTipologieUtenti()
 reloadCamions();
 
 function reloadCamions() {
-    getAllCamion().then(camion => { refreshCamionTable(camion) });
+    getAllCamion().then(camion => {
+        console.log(camion);
+        refreshCamionTable(camion)
+    });
 }
 
 function reloadUsers() {
-    getAllUsers().then(users => { refreshUsersTable(users) });
+    getAllUsers().then(users => {
+        users = users.sort((u1,u2) => u1.nome.toLowerCase().localeCompare(u2.nome.toLowerCase()))
+        console.log(users);
+        refreshUsersTable(users)
+    });
 }
 
 function refreshUsersTable(users) {
@@ -89,5 +96,89 @@ function disableUserAndReload(user) {
 }
 
 function showDialog(dialogId) {
-    toggleDialog(dialogId);
+    var dialog = document.getElementById(dialogId);
+    toggleDialog(dialogId).then(isVisible => {
+        if (isVisible && dialogId == 'newUserPopup') {
+            createUserForm(dialog);
+        }
+    });
+}
+
+function createUserForm(dialog) {
+    var div = document.createElement("div");
+    div.className = "form-input-text"
+    var label = document.createElement("span");
+    label.innerText = "Tipo contratto";
+    div.appendChild(label);
+    createDropdown(
+        "tipo_contratto",
+        _tipologie.map(x => ({ value: x.codice, text: x.descrizione })),
+        div,
+        _tipologie[0].descrizione, _tipologie[0].codice
+    );
+    div.querySelector('select').className = "form-select";
+    dialog.appendChild(div);
+    
+    input = inputField("Salario", "");
+    input.querySelector("input").type = 'number'
+    input.querySelector("input").required = true;
+    dialog.appendChild(input);
+
+    [
+        { field: "Nome", type: "text", required: true },
+        { field: "Cognome", type: "text", required: true },
+        { field: "Codice Fiscale", type: "text", required: true },
+        { field: "Indirizzo", type: "text", required: false },
+        { field: "Telefono", type: "number", required: false },
+        { field: "Email", type: "email", required: true },
+        { field: "Password", type: "password", required: true },
+    ].forEach(x => {
+        var input = inputField(x.field, "");
+        input.querySelector("input").type = x.type;
+        input.querySelector("input").required = x.required;
+        dialog.appendChild(input);
+    })
+
+    var btn = document.createElement("button");
+    btn.className = "form-btn";
+    btn.innerText = "Crea utente";
+    btn.onclick = () => {
+        if (checkNewUserData(dialog)) {
+            saveNewUser(dialog).then(() => {reloadUsers()});
+        }
+    }
+    dialog.appendChild(btn);
+}
+
+function checkNewUserData(dialog) {
+    var fields = dialog.querySelectorAll("input, select");
+    for (field of fields) {
+        // Ignores the step mismatch error
+        if (!field.validity.valid && !field.validity.stepMismatch) {
+            toastError("Il campo \"${field.title}\" non ha un valore valido");
+            return false;
+        }
+    }
+    return true;
+}
+
+function saveNewUser(dialog) {
+    var user = {
+        nome: dialog.querySelector("input[title='Nome']").value ?? "",
+        cognome: dialog.querySelector("input[title='Cognome']").value ?? "",
+        cf: dialog.querySelector("input[title='Codice Fiscale']").value ?? "",
+        telefono: dialog.querySelector("input[title='Telefono']").value ?? "",
+        email: dialog.querySelector("input[title='Email']").value ?? "",
+        password: dialog.querySelector("input[title='Password']").value ?? "",
+        indirizzo: dialog.querySelector("input[title='Indirizzo']").value ?? "",
+        salario: dialog.querySelector("input[title='Salario']").value ?? "",
+        tipo_contratto: dialog.querySelector("select").value ?? "",
+        attivo: 1,
+        data_assunzione: new Date().toISOString()
+    }
+    createUser(user).then(() => {
+        toastSuccess("Utente creato con successo");
+        toggleDialog('newUserPopup');
+        reloadUsers();
+    })
 }

@@ -25,6 +25,18 @@ function disableUser(user) {
         })
 }
 
+function createUser(user) {
+    if (!user) {
+        toastError("Errore durante la creazione dell'utente");
+        return;
+    }
+    return getSupabase()
+        .from('Utenti')
+        .insert([ user ])
+        .select()
+        .then(res => dataOrNull(res))
+}
+
 function getStatsUtentiCorse() {
     return getSupabase()
         .rpc('get_stats_utenti_corse', { })

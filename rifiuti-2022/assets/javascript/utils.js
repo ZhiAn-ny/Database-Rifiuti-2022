@@ -84,12 +84,15 @@ function updateColumnValue(table, id, columnIndex, newValue, operation) {
 
 // DROPDOWNS
 
-function createDropdown(id, options, container, defaultText = "Scegli un'opzione") {
+function createDropdown(
+    id, options, container,
+    defaultText = "Scegli un'opzione", defaultValue = ''
+) {
     const select = document.createElement('select');
     select.id = id;
 
     const defaultOption = document.createElement('option');
-    defaultOption.value = '';
+    defaultOption.value = defaultValue;
     defaultOption.text = defaultText;
     defaultOption.disabled = true;
     defaultOption.selected = true;
@@ -143,6 +146,25 @@ function formatDate(data) {
 
 function booleanToTicks(bool) {
     return bool ? '\u2705' : '\u274C';
+}
+
+/**
+ * Creates an input field with a label.
+ * The deafult type is 'text'.
+ * @returns div containing a span for the lable and the input
+ */
+function inputField(lable, placeholder) {
+    const div = document.createElement('div');
+    div.className = "form-input-text"
+    const label = document.createElement('span');
+    label.innerText = lable;
+    div.appendChild(label);
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = placeholder;
+    input.title = lable;
+    div.appendChild(input);
+    return div;
 }
 
 // DIALOG

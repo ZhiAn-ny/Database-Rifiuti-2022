@@ -46,6 +46,11 @@ async function fetchMagazzinoRifiuti() {
                 tableLabel.innerText = infoStabilimento.stabilimento + " - " + infoStabilimento.comune + ", " + infoStabilimento.zona;
                 container.appendChild(tableLabel);
 
+                if(infoStabilimento.tipo == 3) {
+                    createDropdown('rifiutiSelect', [], container, "Scegli un rifiuto da accettare:");
+                    handleRifiutiDropdown();
+                }
+
                 container.appendChild(table);
             }
         }
@@ -83,4 +88,23 @@ async function smaltisci(rifiuto_id, lotto_id) {
     .eq('lotto', lotto_id)
     .eq('rifiuto', rifiuto_id)
     .select()
+}
+
+async function handleRifiutiDropdown() {
+    const select = document.getElementById('rifiutiSelect');
+
+    const rifiuti = await fetchRifiuti();
+    rifiuti.forEach(rifiuto => {
+        const option = document.createElement('option');
+        option.value = rifiuto.rifiuto_id;
+        option.text = rifiuto.rifiuto_des;
+        select.appendChild(option);
+    });
+}
+
+async function fetchRifiuti() {
+    const { data, error } = await getSupabase()
+        .rpc('get_rifiuti')
+    if (error) console.error(error)
+    else return data
 }

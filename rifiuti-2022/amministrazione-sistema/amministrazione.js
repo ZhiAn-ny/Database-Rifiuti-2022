@@ -2,30 +2,32 @@ var data = getLoginInfo();
 const usersContainer = document.querySelector(".users-container");
 const machineContainer = document.querySelector(".machines-container");
 
-var _users = [];
 var _tipologie = [];
 
-Promise.all([getAllUsers(), getAllTipologieUtenti()])
-.then(([users, tipologie]) => {
-    console.log(users, tipologie);
-    _tipologie = tipologie;
-    _users = users;
-    reloadUsersRows(users);
-})
+getAllTipologieUtenti()
+    .then(tipologie => { _tipologie = tipologie })
+    .then(() => { reloadUsers() });
 
-getAllCamion().then(camion => {
-    console.log(camion);
-    reloadCamionRows(camion);
-})
+reloadCamions();
 
-function reloadUsersRows(users) {
+function reloadCamions() {
+    getAllCamion().then(camion => { refreshCamionTable(camion) });
+}
+
+function reloadUsers() {
+    getAllUsers().then(users => { refreshUsersTable(users) });
+}
+
+function refreshUsersTable(users) {
     usersContainer.innerHTML = "";
-    createTableHeader(usersContainer, ["Nome", "Cognome", "Codice Fiscale", "Telefono", "Email", "Indirizzo", "Tipologia", "Salario"]);
+    createTableHeader(usersContainer, ["Azioni","Nome", "Cognome", "Codice Fiscale", "Telefono", "Email", "Indirizzo", "Tipologia", "Salario"]);
     var body = document.createElement("tbody");
     users.forEach(user => {
         var tipologia = _tipologie.find(x => x.codice === user.tipo_contratto);
         var row = document.createElement("tr");
         row.className = "table-row";
+        var btn = document.createElement("button");
+        addButtonCell(row, "🗑️", () => { disableUserAndReload(user)}, btn);
         addCell(row, user.nome);
         addCell(row, user.cognome);
         addCell(row, user.cf);
@@ -39,13 +41,15 @@ function reloadUsersRows(users) {
     usersContainer.appendChild(body);
 }
 
-function reloadCamionRows(camions) {
+function refreshCamionTable(camions) {
     machineContainer.innerHTML = "";
-    createTableHeader(machineContainer, ["Targa", "Modello", "Numero di telaio", "Data acquisizione", "Anno immatricolazione"]);
+    createTableHeader(machineContainer, ["Azioni", "Targa", "Modello", "Numero di telaio", "Data acquisizione", "Anno immatricolazione"]);
     var body = document.createElement("tbody");
     camions.forEach(camion => {
         var row = document.createElement("tr");
         row.className = "table-row";
+        var btn = document.createElement("button");
+        addButtonCell(row, "🗑️", () => {deleteCamionAndReload(camion)}, btn);
         addCell(row, camion.targa);
         addCell(row, camion.modello);
         addCell(row, camion.numero_telaio);
@@ -54,4 +58,12 @@ function reloadCamionRows(camions) {
         body.appendChild(row);
     })
     machineContainer.appendChild(body);
+}
+
+function deleteCamionAndReload(camion) {
+    deleteCamion(camion).then(() => {reloadCamions()});
+}
+
+function disableUserAndReload(user) {
+    disableUser(user).then(() => {reloadUsers()});
 }

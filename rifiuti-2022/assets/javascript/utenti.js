@@ -11,6 +11,20 @@ function getAllUsersWorkedTime() {
         .then(res => dataOrNull(res));
 }
 
+function disableUser(user) {
+    return getSupabase()
+        .from("Utenti")
+        .update({attivo: 0})
+        .eq('cf', user.cf)
+        .select()
+        .then(res => dataOrNull(res))
+        .then(data => {
+            if (data != null) {
+                toastSuccess("Utente disabilitato con successo")
+            }
+        })
+}
+
 function getStatsUtentiCorse() {
     return getSupabase()
         .rpc('get_stats_utenti_corse', { })

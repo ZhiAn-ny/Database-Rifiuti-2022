@@ -5,3 +5,11 @@ async function getAllCamion() {
     if (error) console.error(error)
     else return data
 }
+
+function deleteCamion(camion) {
+    return getSupabase()
+        .from('Camion')
+        .delete()
+        .eq('targa', camion.targa)
+        .then(res => dataOrNull(res));
+}

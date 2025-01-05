@@ -13,6 +13,11 @@ Promise.all([getAllUsers(), getAllTipologieUtenti()])
     reloadUsersRows(users);
 })
 
+getAllCamion().then(camion => {
+    console.log(camion);
+    reloadCamionRows(camion);
+})
+
 function reloadUsersRows(users) {
     usersContainer.innerHTML = "";
     createTableHeader(usersContainer, ["Nome", "Cognome", "Codice Fiscale", "Telefono", "Email", "Indirizzo", "Tipologia", "Salario"]);
@@ -21,7 +26,6 @@ function reloadUsersRows(users) {
         var tipologia = _tipologie.find(x => x.codice === user.tipo_contratto);
         var row = document.createElement("tr");
         row.className = "table-row";
-        
         addCell(row, user.nome);
         addCell(row, user.cognome);
         addCell(row, user.cf);
@@ -30,18 +34,24 @@ function reloadUsersRows(users) {
         addCell(row, user.indirizzo);
         addCell(row, tipologia?.descrizione ?? "");
         addCell(row, `€ ${user.salario}`);        
-        
-        // row.innerHTML = `
-        //     <td style="flex-grow: 1;">${user.nome}</td>
-        //     <td style="flex-grow: 1;">${user.cognome}</td>
-        //     <td style="flex-grow: 2;">${user.cf}</td>
-        //     <td style="flex-grow: 1;">${user.telefono}</td>
-        //     <td style="flex-grow: 2;">${user.email}</td>
-        //     <td style="flex-grow: 2;">${user.indirizzo}</td>
-        //     <td style="flex-grow: 1;">${tipologia?.descrizione ?? ""}</td>
-        //     <td style="flex-grow: 1;">€ ${user.salario}</td>
-        // `;
         body.appendChild(row);
     });
     usersContainer.appendChild(body);
+}
+
+function reloadCamionRows(camions) {
+    machineContainer.innerHTML = "";
+    createTableHeader(machineContainer, ["Targa", "Modello", "Numero di telaio", "Data acquisizione", "Anno immatricolazione"]);
+    var body = document.createElement("tbody");
+    camions.forEach(camion => {
+        var row = document.createElement("tr");
+        row.className = "table-row";
+        addCell(row, camion.targa);
+        addCell(row, camion.modello);
+        addCell(row, camion.numero_telaio);
+        addCell(row, camion.data_acquisizione);
+        addCell(row, camion.anno_immatricolazione);
+        body.appendChild(row);
+    })
+    machineContainer.appendChild(body);
 }

@@ -15,6 +15,7 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
         <script src="../assets/javascript/utils.js"></script>
         <script src="../assets/javascript/auth.js"></script>
         <script src="../assets/javascript/utenti.js"></script>
+        <script src="../assets/javascript/camion.js"></script>
         <script src="amministrazione.js" defer></script>
         <link href="../assets/css/global.css" rel="stylesheet" type="text/css"/>
         <link href="../assets/css/amministrazione.css" rel="stylesheet" type="text/css"/>

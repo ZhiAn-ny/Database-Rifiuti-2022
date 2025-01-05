@@ -84,13 +84,13 @@ function updateColumnValue(table, id, columnIndex, newValue, operation) {
 
 // DROPDOWNS
 
-function createDropdown(id, options, container) {
+function createDropdown(id, options, container, defaultText = "Scegli un'opzione") {
     const select = document.createElement('select');
     select.id = id;
 
     const defaultOption = document.createElement('option');
     defaultOption.value = '';
-    defaultOption.text = 'Select an option';
+    defaultOption.text = defaultText;
     defaultOption.disabled = true;
     defaultOption.selected = true;
     select.appendChild(defaultOption);

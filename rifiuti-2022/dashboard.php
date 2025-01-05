@@ -40,6 +40,7 @@ $nome = ''
                 <button onclick="redirectToPage('magazzino.php', getLoginInfo())">Magazzino</button>
                 <button onclick="redirectToPage('gestione-corse', getLoginInfo())">Gestione corse</button>
                 <button onclick="redirectToPage('gestione-rotte', getLoginInfo())">Gestione rotte</button>
+                <button onclick="redirectToPage('amministrazione-sistema', getLoginInfo())">Amministrazione del sistema</button>
                 <button onclick="redirectToPage('statistiche', getLoginInfo())">Statistiche aziendali</button>
             </section>
         </div>

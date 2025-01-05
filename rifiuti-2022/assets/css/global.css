@@ -146,6 +146,7 @@ hr {
 ::-webkit-scrollbar {
     width: 7px;
     /* width of the entire scrollbar */
+    height: 7px;
 }
 ::-webkit-scrollbar-track {
     background: var(--primary-color-l);

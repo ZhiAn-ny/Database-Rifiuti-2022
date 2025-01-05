@@ -1,0 +1,20 @@
+.users-container, .machines-container {
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 1rem;
+    background-color: var(--primary-color-l);
+    border: 1px solid var(--primary-color-l);
+    border-radius: 10px;
+    overflow: auto;
+}
+
+.table-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+.table-row td {
+    white-space: nowrap;
+}

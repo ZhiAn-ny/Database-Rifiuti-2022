@@ -17,6 +17,13 @@ function getStatsUtentiCorse() {
         .then(res => dataOrNull(res));
 }
 
+function getAllTipologieUtenti() {
+    return getSupabase()
+        .from("Tipologie_Utenti")
+        .select()
+        .then(res => dataOrNull(res));
+}
+
 function getTipologiaUtente(typeId) {
     return getSupabase()
         .from("Tipologie_Utenti")

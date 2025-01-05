@@ -2,6 +2,8 @@ var data = getLoginInfo();
 const usersContainer = document.querySelector(".users-container");
 const machineContainer = document.querySelector(".machines-container");
 
+
+
 var _tipologie = [];
 
 getAllTipologieUtenti()
@@ -26,8 +28,12 @@ function refreshUsersTable(users) {
         var tipologia = _tipologie.find(x => x.codice === user.tipo_contratto);
         var row = document.createElement("tr");
         row.className = "table-row";
-        var btn = document.createElement("button");
-        addButtonCell(row, "🗑️", () => { disableUserAndReload(user)}, btn);
+        if (user.cf == data.cf) {
+            addCell(row, "");
+        } else {
+            var btn = document.createElement("button");
+            addButtonCell(row, "🗑️", () => { disableUserAndReload(user)}, btn);
+        }
         addCell(row, user.nome);
         addCell(row, user.cognome);
         addCell(row, user.cf);

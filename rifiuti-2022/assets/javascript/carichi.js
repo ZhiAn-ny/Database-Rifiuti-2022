@@ -32,7 +32,7 @@ async function getStatoCarico(inizio_input, targa_input) {
     else return data;
 }
 
-async function setStatoCarico(stato, inizio_input, targa_input) {
+async function setStatoCarico(stato, inizio_input, targa_input, ignoraConferma = false) {
     switch (stato) {
         case StatiCarico.IN_CARICO:
             const { dataInCarico, errorInCarico } = await getSupabase()
@@ -45,8 +45,11 @@ async function setStatoCarico(stato, inizio_input, targa_input) {
             if (errorInTransito) console.error(errorInTransito)
             return true;
         case StatiCarico.CONSEGNATO:
-            const userResponse = confirm("Vuoi consegnare il carico di questo camion?");
-            if(userResponse) {
+            const userResponse = "";
+            if(!ignoraConferma) {
+                userResponse = confirm("Vuoi consegnare il carico di questo camion?");
+            }
+            if(userResponse || ignoraConferma) {
                 const { dataConsegnato, errorConsegnato } = await getSupabase()
                 .rpc('set_carico_consegnato', { inizio_input: inizio_input, targa_input: targa_input })
                 if (errorConsegnato) console.error(errorConsegnato)

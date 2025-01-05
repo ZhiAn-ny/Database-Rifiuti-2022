@@ -47,8 +47,7 @@ async function fetchMagazzinoRifiuti() {
                 container.appendChild(tableLabel);
 
                 if(infoStabilimento.tipo == 3) {
-                    createDropdown('rifiutiSelect', [], container, "Scegli un rifiuto da accettare:");
-                    handleRifiutiDropdown();
+                    handleRifiutiDropdown(stabilimento.stabilimento, stabilimento.comune, stabilimento.zona);
                 }
 
                 container.appendChild(table);
@@ -90,8 +89,25 @@ async function smaltisci(rifiuto_id, lotto_id) {
     .select()
 }
 
-async function handleRifiutiDropdown() {
+async function handleRifiutiDropdown(stabilimento, comune, zona) {
+    const container = document.getElementById('tableContainer');
+    createDropdown('rifiutiSelect', [], container, "Scegli un rifiuto da accettare:");
     const select = document.getElementById('rifiutiSelect');
+    const rifiutiQtaInput = document.createElement('input');
+    
+    const selectRifiutiBtn = document.createElement('button');
+    selectRifiutiBtn.textContent = "Invia rifiuto in accettazione";
+    selectRifiutiBtn.onclick = () => inviaInAccettazione(select.value, isNaN(parseInt(rifiutiQtaInput.value)) ? 1 : parseInt(rifiutiQtaInput.value), stabilimento, comune, zona);
+    
+    rifiutiQtaInput.setAttribute('type', 'number');
+    rifiutiQtaInput.setAttribute('id', 'qtaInput');
+    rifiutiQtaInput.setAttribute('name', 'qtaInput');
+    rifiutiQtaInput.setAttribute('min', '1');
+    rifiutiQtaInput.setAttribute('step', '1');
+    rifiutiQtaInput.setAttribute('placeholder', 'Inserisci la quantità');
+
+    container.appendChild(rifiutiQtaInput);
+    container.appendChild(selectRifiutiBtn);
 
     const rifiuti = await fetchRifiuti();
     rifiuti.forEach(rifiuto => {
@@ -107,4 +123,19 @@ async function fetchRifiuti() {
         .rpc('get_rifiuti')
     if (error) console.error(error)
     else return data
+}
+
+async function inviaInAccettazione(rifiuto, quantita, stabilimento, comune, zona) {
+    addCarico().then(async carico => {
+        console.log(carico);
+        if (carico != null) {
+            await aggiungiRifiutiLotto(rifiuto, carico.lotto, quantita).then(async () => {
+                await setStatoCarico(StatiCarico.CONSEGNATO, null, null, true)
+                await consegnaLotto(carico.lotto, stabilimento, zona, comune);
+                refreshTables([
+                    { table: document.getElementById('tableContainer'), function: fetchMagazzinoRifiuti() }
+                ]);
+            })
+        }
+    })
 }

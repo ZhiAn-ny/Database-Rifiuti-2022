@@ -13,3 +13,15 @@ function deleteCamion(camion) {
         .eq('targa', camion.targa)
         .then(res => dataOrNull(res));
 }
+
+function createCamion(camion) {
+    if (!camion) {
+        toastError("Errore durante la creazione del camion");
+        return;
+    }
+    return getSupabase()
+        .from('Camion')
+        .insert([camion])
+        .select()
+        .then(res => dataOrNull(res));
+}

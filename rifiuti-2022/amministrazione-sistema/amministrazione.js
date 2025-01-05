@@ -9,7 +9,7 @@ createDialogFrom(
 );
 createDialogFrom(
     'newMachinePopup',
-    'padding: 50px; width: 40%; gap: 30px; left: 25%;'
+    'padding: 50px; width: 40%; height: 55%; gap: 30px; left: 25%;'
 );
 
 var _tipologie = [];
@@ -100,8 +100,35 @@ function showDialog(dialogId) {
     toggleDialog(dialogId).then(isVisible => {
         if (isVisible && dialogId == 'newUserPopup') {
             createUserForm(dialog);
+        } else if (isVisible && dialogId == 'newMachinePopup') {
+            createMachineForm(dialog);
         }
     });
+}
+
+function createMachineForm(dialog) {
+    [
+        { field: "Targa", type: "text", required: true },
+        { field: "Modello", type: "text", required: true },
+        { field: "Numero di telaio", type: "text", required: true },
+        { field: "Anno immatricolazione", type: "date", required: false },
+        { field: "Data acquisizione", type: "date", required: true },
+    ].forEach(x => {
+        var input = inputField(x.field, "");
+        input.querySelector("input").type = x.type;
+        input.querySelector("input").required = x.required;
+        dialog.appendChild(input);
+    })
+
+    var btn = document.createElement("button");
+    btn.className = "form-btn";
+    btn.innerText = "Crea utente";
+    btn.onclick = () => {
+        if (checkFormValidity(dialog)) {
+            saveNewMachine(dialog).then(() => {reloadCamions()});
+        }
+    }
+    dialog.appendChild(btn);
 }
 
 function createUserForm(dialog) {
@@ -143,19 +170,19 @@ function createUserForm(dialog) {
     btn.className = "form-btn";
     btn.innerText = "Crea utente";
     btn.onclick = () => {
-        if (checkNewUserData(dialog)) {
+        if (checkFormValidity(dialog)) {
             saveNewUser(dialog).then(() => {reloadUsers()});
         }
     }
     dialog.appendChild(btn);
 }
 
-function checkNewUserData(dialog) {
+function checkFormValidity(dialog) {
     var fields = dialog.querySelectorAll("input, select");
     for (field of fields) {
         // Ignores the step mismatch error
         if (!field.validity.valid && !field.validity.stepMismatch) {
-            toastError("Il campo \"${field.title}\" non ha un valore valido");
+            toastError("Il campo " + field.title + " non ha un valore valido");
             return false;
         }
     }
@@ -180,5 +207,20 @@ function saveNewUser(dialog) {
         toastSuccess("Utente creato con successo");
         toggleDialog('newUserPopup');
         reloadUsers();
-    })
+    });
+}
+
+function saveNewMachine(dialog) {
+    var machine = {
+        targa: dialog.querySelector("input[title='Targa']").value ?? "",
+        numero_telaio: dialog.querySelector("input[title='Numero di telaio']").value ?? "",
+        modello: dialog.querySelector("input[title='Modello']").value ?? "",
+        anno_immatricolazione: dialog.querySelector("input[title='Anno immatricolazione']").value ?? "",
+        data_acquisizione: dialog.querySelector("input[title='Data acquisizione']").value ?? "",
+    };
+    createCamion(machine).then(() => {
+        toastSuccess("Macchina creata con successo");
+        toggleDialog('newMachinePopup');
+        reloadCamions();
+    });
 }

@@ -1,8 +1,16 @@
 var data = getLoginInfo();
 const usersContainer = document.querySelector(".users-container");
 const machineContainer = document.querySelector(".machines-container");
-
-
+const newUserPopup = document.getElementById('newUserPopup');
+const newMachinePopup = document.getElementById('newMachinePopup');
+createDialogFrom(
+    'newUserPopup',
+    'padding: 50px; width: 40%; gap: 30px; left: 25%;'
+);
+createDialogFrom(
+    'newMachinePopup',
+    'padding: 50px; width: 40%; gap: 30px; left: 25%;'
+);
 
 var _tipologie = [];
 
@@ -22,7 +30,10 @@ function reloadUsers() {
 
 function refreshUsersTable(users) {
     usersContainer.innerHTML = "";
-    createTableHeader(usersContainer, ["Azioni","Nome", "Cognome", "Codice Fiscale", "Telefono", "Email", "Indirizzo", "Tipologia", "Salario"]);
+    createTableHeader(usersContainer, [
+        "Azioni","Nome", "Cognome", "Codice Fiscale", "Telefono", "Email",
+         "Indirizzo", "Tipologia", "Salario"
+    ]);
     var body = document.createElement("tbody");
     users.forEach(user => {
         var tipologia = _tipologie.find(x => x.codice === user.tipo_contratto);
@@ -49,7 +60,10 @@ function refreshUsersTable(users) {
 
 function refreshCamionTable(camions) {
     machineContainer.innerHTML = "";
-    createTableHeader(machineContainer, ["Azioni", "Targa", "Modello", "Numero di telaio", "Data acquisizione", "Anno immatricolazione"]);
+    createTableHeader(machineContainer, [
+        "Azioni", "Targa", "Modello", "Numero di telaio", "Data acquisizione",
+        "Anno immatricolazione"
+    ]);
     var body = document.createElement("tbody");
     camions.forEach(camion => {
         var row = document.createElement("tr");
@@ -72,4 +86,8 @@ function deleteCamionAndReload(camion) {
 
 function disableUserAndReload(user) {
     disableUser(user).then(() => {reloadUsers()});
+}
+
+function showDialog(dialogId) {
+    toggleDialog(dialogId);
 }

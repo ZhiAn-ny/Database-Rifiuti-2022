@@ -26,15 +26,24 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
             fetchLoginData();
         </script>
         
+        <div id="newUserPopup"></div>
+        <div id="newMachinePopup"></div>
+
         <section>
-            <h1>Amministrazione Utenti</h1>
+            <div class="flex-row">    
+                <h1>Amministrazione Utenti</h1>
+                <button class="add-btn" onclick="showDialog('newUserPopup')">+</button>
+            </div>
             <div class="table-container">
                 <table class="users-container"></table>
             </div>
         </section>
         
         <section>
-            <h1>Amministrazioni Macchine</h1>
+            <div class="flex-row">    
+                <h1>Amministrazioni Macchine</h1>
+                <button class="add-btn" onclick="showDialog('newMachinePopup')">+</button>
+            </div>
             <div class="table-container">
                 <table class="machines-container"></table>
             </div>

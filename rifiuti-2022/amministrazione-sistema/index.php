@@ -25,11 +25,19 @@ $apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6
             fetchLoginData();
         </script>
         
-        <h1>Amministrazione Utenti</h1>
-        <table class="users-container"></table>
+        <section>
+            <h1>Amministrazione Utenti</h1>
+            <div class="table-container">
+                <table class="users-container"></table>
+            </div>
+        </section>
         
-        <h1>Amministrazioni Macchine</h1>
-        <table class="machines-container"></table>
+        <section>
+            <h1>Amministrazioni Macchine</h1>
+            <div class="table-container">
+                <table class="machines-container"></table>
+            </div>
+        </section>
 
     </body>
 </html>
